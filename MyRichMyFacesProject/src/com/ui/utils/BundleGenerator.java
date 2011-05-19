@@ -3,29 +3,38 @@ package com.ui.utils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Properties;
 
 public class BundleGenerator {
-	private static String BUNDLE_PACKAGE = "\\src\\com\\ui\\bundle\\";
+	private static String BUNDLE_KEY = "BUNDLE";
+	private static String SOURCE_FILE_NAME_KEY = "SOURCE_FILE_NAME";
+	private static String PROP_FILE = "src\\bundle_generator_config.properties";
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String sourceFilePath = null;
-		String sourceFileName = "WebMessages.txt";
+		String destinationDir = null;
+		Properties properties = new Properties();
+		String bundlePackage = null;
+		String sourceFileName = null;
 		try {
-			sourceFilePath = new File(".").getCanonicalPath() + BUNDLE_PACKAGE
-					+ sourceFileName;
-		} catch (IOException e1) {
+			properties.load(new FileInputStream(PROP_FILE));
+			bundlePackage = properties.getProperty(BUNDLE_KEY);
+			sourceFileName = properties.getProperty(SOURCE_FILE_NAME_KEY);
+			destinationDir = new File(".").getCanonicalPath() + bundlePackage;
+		} catch (IOException e) {
 			System.err
 					.append("Възникна грешка при опит за изчитане на текущата директория.");
 		}
 
-		File f = new File(sourceFilePath);
+		File sourceFile = new File(destinationDir + sourceFileName);
 		BufferedReader reader = null;
 		try {
 			char separator = 0;
@@ -35,7 +44,7 @@ public class BundleGenerator {
 			StringBuilder[] contents = null;
 			String line = null;
 			String[] subs = null;
-			reader = new BufferedReader(new FileReader(f));
+			reader = new BufferedReader(new FileReader(sourceFile));
 			int cnt = 0;
 			while ((line = reader.readLine()) != null) {
 				cnt++;
@@ -91,15 +100,15 @@ public class BundleGenerator {
 
 			for (int x = 0; x < locales.length; x++) {
 				if (contents[x].length() > 0) {
-					writeFile(contents[x], sourceFilePath + targetFileName
+					writeFile(contents[x], destinationDir + targetFileName
 							+ locales[x] + targetFileExtension);
 				}
 			}
 
 		} catch (FileNotFoundException e) {
-			System.err.append("Липсва търсеният файл " + sourceFilePath);
+			System.err.append("Липсва търсеният файл " + destinationDir);
 		} catch (IOException e) {
-			System.err.append("Проблем с " + sourceFilePath);
+			System.err.append("Проблем с " + destinationDir);
 		} finally {
 			if (reader != null) {
 				try {
