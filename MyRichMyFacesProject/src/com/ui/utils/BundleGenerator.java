@@ -15,24 +15,26 @@ public class BundleGenerator {
 	private static String BUNDLE_KEY = "BUNDLE_PACKAGE";
 	private static String SOURCE_FILE_EXTENSION = "SOURCE_FILE_EXTENSION";
 	private static String PROP_FILE = "src\\bundle_generator_config.properties";
+	private static String COMMENT_CHAR = "#";
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String destinationDirPath = null;
 		Properties properties = new Properties();
 		String bundlePackage = null;
 		String sourceFileExt = null;
+		String destinationDirPath = null;
 		try {
 			properties.load(new FileInputStream(PROP_FILE));
+
 			bundlePackage = properties.getProperty(BUNDLE_KEY);
-			sourceFileExt = properties.getProperty(SOURCE_FILE_EXTENSION);
 			if (bundlePackage == null) {
 				System.err.append("Във файлa " + PROP_FILE
 						+ " трябва да има добавен ключ " + BUNDLE_KEY + ".");
 			}
 
+			sourceFileExt = properties.getProperty(SOURCE_FILE_EXTENSION);
 			if (sourceFileExt == null) {
 				System.err.append("Във файлa " + PROP_FILE
 						+ " трябва да има добавен ключ "
@@ -87,38 +89,7 @@ public class BundleGenerator {
 					}
 					contents = new StringBuilder[locales.length];
 				} else {
-					if (line.indexOf(separator) > 0) {
-						subs = line.split(new String(new char[] { separator }));
-						int wordCount = locales.length + 1;
-						if (subs.length != wordCount) {
-							System.err
-									.append("Грешка на ред: "
-											+ cnt
-											+ " Трябва да има точно "
-											+ wordCount
-											+ " думи с разделител \""
-											+ separator
-											+ "\". Думите са ключ и превод за всеки един от посочените local-и. \n");
-						} else {
-
-							for (int x = 0; x < locales.length; x++) {
-								if (contents[x] == null) {
-									StringBuilder b = new StringBuilder();
-									contents[x] = b;
-								}
-								if (locales[x].equalsIgnoreCase("_bg")) {
-									contents[x].append(subs[0] + "="
-											+ convertToHexString(subs[x + 1]));
-								} else {
-									contents[x].append(subs[0] + "="
-											+ subs[x + 1]);
-								}
-
-								contents[x].append(System
-										.getProperty("line.separator"));
-							}
-						}
-					}
+					writeLine(separator, locales, contents, line, cnt);
 				}
 			}
 
@@ -142,6 +113,51 @@ public class BundleGenerator {
 				}
 			}
 		}
+	}
+
+	private static void writeLine(char separator, String[] locales,
+			StringBuilder[] contents, String line, int cnt) {
+		String[] subs;
+
+		if (line.startsWith(COMMENT_CHAR)) {
+			for (int x = 0; x < locales.length; x++) {
+				contents[x] = appendLine(contents[x], line);
+			}
+		} else {
+			if (line.indexOf(separator) > 0) {
+				subs = line.split(new String(new char[] { separator }));
+				int wordCount = locales.length + 1;
+				if (subs.length != wordCount) {
+					System.err
+							.append("Грешка на ред: "
+									+ cnt
+									+ " Трябва да има точно "
+									+ wordCount
+									+ " думи с разделител \""
+									+ separator
+									+ "\". Думите са ключ и превод за всеки един от посочените local-и. \n");
+				} else {
+					for (int x = 0; x < locales.length; x++) {
+						if (locales[x].equalsIgnoreCase("_bg")) {
+							contents[x] = appendLine(contents[x], subs[0] + "="
+									+ convertToHexString(subs[x + 1]));
+						} else {
+							contents[x] = appendLine(contents[x], subs[0] + "="
+									+ subs[x + 1]);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private static StringBuilder appendLine(StringBuilder builder, String line) {
+		if (builder == null) {
+			builder = new StringBuilder();
+		}
+		builder.append(line);
+		builder.append(System.getProperty("line.separator"));
+		return builder;
 	}
 
 	public static void writeFile(StringBuilder builder, String fileName) {
