@@ -1,4 +1,4 @@
-package com.ui.mangedBeans;
+package com.ui.beans;
 
 public class MBError {
 

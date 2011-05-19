@@ -3,7 +3,7 @@
  */
 package com.ui.utils;
 
-import com.ui.mangedBeans.MBError;
+import com.ui.beans.MBError;
 
 /**
  * Списък на MB в ЕСУРПД
