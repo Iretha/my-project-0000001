@@ -20,15 +20,16 @@
 	<f:view>
 		<h:panelGrid columns="1" styleClass="outerPanel" id="outerPanel">
 			<jsp:include page="/pages/common/header.jsp" />
+			<jsp:include page="/pages/common/locale.jsp" />
 			<jsp:include page="/pages/common/status.jsp" />
-			<rich:panel header="Вход">
+			<rich:panel header="#{msg.LOGIN}">
 				<a4j:form id="formLogin">
 					<h:panelGrid columns="1">
-						<h:outputText value="Потребителско име" />
+						<h:outputText value="#{msg.LOGIN_USERNAME}" />
 						<h:inputText />
-						<h:outputText value="Парола" />
+						<h:outputText value="#{msg.LOGIN_PWD}" />
 						<h:inputSecret />
-						<a4j:commandButton value="Вход" id="btnLogin"
+						<a4j:commandButton value="#{msg.LOGIN}" id="btnLogin"
 							styleClass="commandButton" type="submit" />
 					</h:panelGrid>
 					<rich:messages infoClass="infoClass" errorClass="errorClass" />

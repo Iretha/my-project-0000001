@@ -3,7 +3,7 @@
  */
 package com.ui.utils;
 
-import com.ui.beans.MBError;
+import com.ui.beans.common.MBError;
 import com.ui.beans.common.MBProgressBar;
 
 /**

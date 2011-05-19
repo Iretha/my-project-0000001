@@ -8,6 +8,10 @@
 			<default-locale>bg</default-locale>
 			<supported-locale>en</supported-locale>
 		</locale-config>
+		<resource-bundle>
+			<base-name>com.ui.bundle.WebMessages</base-name>
+			<var>msg</var>
+		</resource-bundle>
 	</application>
 
 	<component>
@@ -24,6 +28,11 @@
 	<managed-bean>
 		<managed-bean-name>user</managed-bean-name>
 		<managed-bean-class>com.ui.beans.common.MBUser</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>locale</managed-bean-name>
+		<managed-bean-class>com.ui.beans.common.MBLocale</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 
