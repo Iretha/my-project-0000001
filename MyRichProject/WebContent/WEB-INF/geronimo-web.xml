@@ -3,10 +3,10 @@
     <dep:environment>
         <dep:moduleId>
             <dep:groupId>default</dep:groupId>
-            <dep:artifactId>MyRichProject</dep:artifactId>
+            <dep:artifactId>MyRichMojarraProject</dep:artifactId>
             <dep:version>1.0</dep:version>
             <dep:type>car</dep:type>
         </dep:moduleId>
     </dep:environment>
-    <web:context-root>/MyRichProject</web:context-root>
+    <web:context-root>/MyRichMojarraProject</web:context-root>
 </web:web-app>

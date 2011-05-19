@@ -1,4 +1,4 @@
-URL: http://localhost:8080/MyRichProject/pages/login.jsf
+URL: http://localhost:8080/MyRichMojarraProject/pages/login.jsf
 
 ADDITIONAL INFO:
 Application server: Geronimo Tomacat v2.2.1
