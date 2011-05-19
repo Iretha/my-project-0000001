@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>t</short-name>
+	<uri>http://myfaces.apache.org/tomahawk</uri>
+	<display-name>Tomahawk tag library.</display-name>
+	<description>MyFaces subproject that contains components and
+		other goodies to be used with any JSF implementation.</description>
+
+	<tag>
+		<name>selectOneRow</name>
+		<tag-class>com.ui.custom.components.SelectOneRowTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>
+			Enhancement for a data-table to select one Row with a
+			radio button.
+			The row-index is stored in the value-binding
+        </description>
+		<attribute>
+			<name>groupName</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+			<type>java.lang.String</type>
+			<description>The Name of the radio-button-group to use</description>
+		</attribute>
+		<attribute>
+			<name>onclick</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<type>java.lang.String</type>
+			<description>The Name of the radio-button-group to use</description>
+		</attribute>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>rendered</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description>the Value-Binding to store/retrive the selected Row
+				Index</description>
+		</attribute>
+	</tag>
+</taglib>
