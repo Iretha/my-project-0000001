@@ -15,5 +15,18 @@
 		<component-class>com.ui.custom.components.SelectOneRow</component-class>
 	</component>
 
-	
+	<!-- MANAGED BEANS -->
+	<managed-bean>
+		<managed-bean-name>progressBar</managed-bean-name>
+		<managed-bean-class>com.ui.beans.common.MBProgressBar</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>user</managed-bean-name>
+		<managed-bean-class>com.ui.beans.common.MBUser</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+
+
 </faces-config>

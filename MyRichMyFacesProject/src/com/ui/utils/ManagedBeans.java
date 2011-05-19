@@ -4,19 +4,25 @@
 package com.ui.utils;
 
 import com.ui.beans.MBError;
+import com.ui.beans.common.MBProgressBar;
 
 /**
- * Списък на MB в ЕСУРПД
+ * Списък на MB
  * 
  * @author developer0024
  * 
  */
-public enum ManagedBeans  {
+public enum ManagedBeans {
 
 	/**
-	 * 
+	 * Грешка
 	 */
-	error(MBError.class), ;
+	error(MBError.class),
+
+	/**
+	 * Прогрес
+	 */
+	progressBar(MBProgressBar.class);
 
 	private Class<? extends Object> cls;
 

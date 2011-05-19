@@ -15,8 +15,7 @@ public class ManagedBeanHelper {
 	 * @param bean
 	 * @return наследник на MBParent
 	 */
-	@SuppressWarnings("unused")
-	private Object findBeanInCtx(ManagedBeans bean) {
+	public Object findBeanInCtx(ManagedBeans bean) {
 		FacesContext fctx = FacesContext.getCurrentInstance();
 		ValueExpression vExpr = getMBValExp(fctx, bean);
 		Object currBean = vExpr.getValue(fctx.getELContext());

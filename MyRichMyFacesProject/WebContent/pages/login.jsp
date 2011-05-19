@@ -29,7 +29,7 @@
 						<h:outputText value="Парола" />
 						<h:inputSecret />
 						<a4j:commandButton value="Вход" id="btnLogin"
-							styleClass="commandButton" />
+							styleClass="commandButton" type="submit" />
 					</h:panelGrid>
 					<rich:messages infoClass="infoClass" errorClass="errorClass" />
 				</a4j:form>
