@@ -1,0 +1,723 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h5,h6,p,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,ins,kbd,q,s,samp,small,strike,sub,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,caption
+	{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	vertical-align: baseline;
+	font-size: 12px;
+	font-family: Tahoma, Geneva, Kalimati, sans-serif
+}
+
+body,html {
+	font-size: 62.5%;
+	font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+	height: 100%;
+	color: #707070;
+	background-color: #FFFFFF;
+}
+
+table {
+	padding: 1;
+	margin: 0;
+}
+
+.rich-table-cell {
+	font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color: #707070;
+}
+
+p.date {
+	float: right;
+	width: 250px;
+	margin-left: 50px;
+	text-align: right;
+	color: #295389
+}
+
+p.link a {
+	color: #FF6E00;
+	text-decoration: none
+}
+
+input {
+	border: 1px solid #CADCF2;
+	background-color: #F0F6FC;
+	width: 138px;
+	font-size: 11px;
+	padding: 3px 2px 3px 2px
+}
+
+input.combo {
+	background-color: #FFFFFF;
+	background-image: url(images/bg_select.gif);
+	background-repeat: no-repeat;
+	background-position: top right;
+	padding: 2px 17px 2px 2px;
+	width: 123px;
+	cursor: default
+}
+
+/********************************
+ *	Faces Components Stylesheet *
+ ********************************/
+a {
+	font-size: 9pt;
+}
+
+.form {
+	
+}
+
+.textAreaSrvcTables {
+	width: 250px;
+	height: 35px;
+	font-size: 8pt;
+}
+
+.inputLong {
+	width: 480px;
+}
+
+.inputTextSrvc {
+	width: 280px;
+}
+
+.textAreaInView {
+	width: 600px;
+	height: 35px;
+}
+
+.commandLink {
+	
+}
+
+.outputLink {
+	
+}
+
+.graphicImage {
+	
+}
+
+.outputLabel {
+	
+}
+
+.inputText {
+	width: 255px;
+}
+
+.inputTextSmall {
+	width: 200px;
+}
+
+.inputTextDoc {
+	width: 200px;
+}
+
+.inputTextDlgNewParticip {
+	width: 270px
+}
+
+.inputText_Error {
+	border-style: solid;
+	border-color: #DE5C5C;
+}
+
+.inputTextarea {
+	
+}
+
+.inputTextareaDlgNewParticip {
+	width: 270px
+}
+
+.inputSecret {
+	
+}
+
+.inputHidden {
+	
+}
+
+.outputText {
+	
+}
+
+.outputTextNormal {
+	width: 150px;
+}
+
+.inputTextNormal {
+	width: 253px;
+}
+
+.outputTextBold {
+	font-weight: bold;
+}
+
+.outputFormat {
+	
+}
+
+.commandButton,.commandButtonExtraMiddle,.commandButtonImg,.commandButtonMiddleNew,.commandButtonLoad,.commandButtonKO,.commandButtonSmall,.commandButtonRegisterLong,.commandButtonLong,.commandButtonMiddle,.stdCommandButton,.commandButtonRegister,.commandButtonGenerate,.disabledCommandButton,.disabledCommandButtonLong,.disabledCommandButton,.disabledCommandButtonRegister,.disabledCommandButtonGenerate,.disabledCommandButtonRegisterLong,.disabledCommandButtonMiddle,.commandButtonDoss
+	{
+	height: 20px;
+	font-size: 11px;
+	background-color: #DFDFDF;
+	border-color: #C0C0C0;
+	color: #515151;
+	font-family: Arial, Verdana, sans-serif;
+	background-position: left top;
+	background-repeat: repeat-x;
+	border-width: 1px;
+	background-image: url("images/btn.png");
+	background-attachment: fixed;
+}
+
+.commandButtonFilterImg {
+	height: 16px;
+	width: 16px;
+}
+
+.leftPanel {
+	width: 33%;
+}
+
+.rightPanel {
+	width: 66%;
+}
+
+.commandButton {
+	width: 120px;
+}
+
+.commandButtonSmall {
+	width: 80px;
+}
+
+.commandButtonDoss {
+	width: 200px;
+}
+
+.commandButtonRegister {
+	width: 260px;
+}
+
+.commandButtonGenerate {
+	width: 230px;
+}
+
+.commandButtonLong {
+	width: 320px;
+}
+
+.commandButtonMiddle {
+	width: 155px;
+}
+
+.commandButtonExtraMiddle {
+	width: 185px;
+}
+
+.commandButtonMiddleNew {
+	width: 170px;
+}
+
+.commandButtonRegisterLong {
+	width: 295px;
+}
+
+.commandButtonLoad {
+	width: 250px;
+	float: right;
+}
+
+.commandButtonFloat {
+	width: 150px;
+	float: right;
+}
+
+.disabledCommandButton,.disabledCommandButtonKO,.disabledCommandButtonRegisterLong,.disabledCommandButtonMiddle,.disabledStdCommandButton,.disabledCommandButtonLong,.disabledCommandButtonRegister,.disabledCommandButtonGenerate
+	{
+	color: #8E8E8E;
+	width: 110px;
+}
+
+.disabledCommandButtonRegisterLong {
+	width: 295px;
+}
+
+.disabledCommandButtonMiddle {
+	width: 150px;
+}
+
+.disabledStdCommandButton {
+	width: 110px;
+}
+
+.disabledCommandButtonLong {
+	width: 320px;
+}
+
+.disabledCommandButtonRegister {
+	width: 210px;
+}
+
+.disabledCommandButtonGenerate {
+	width: 110px;
+}
+
+.disabledCommandButtonKO {
+	width: 210px;
+}
+
+.message {
+	
+}
+
+.messages {
+	
+}
+
+.selectBooleanCheckbox {
+	
+}
+
+.selectBooleanCheckbox_Error {
+	
+}
+
+.selectOneRadio {
+	
+}
+
+.selectOneRadio_Error {
+	
+}
+
+.selectOneRadio_Disabled {
+	color: GrayText;
+}
+
+.selectManyCheckbox {
+	
+}
+
+.selectManyCheckbox_Error {
+	
+}
+
+.selectManyCheckbox_Disabled {
+	color: GrayText;
+}
+
+.selectOneListbox {
+	
+}
+
+.selectOneListbox_Error {
+	
+}
+
+.selectManyListbox {
+	
+}
+
+.selectManyListbox_Error {
+	
+}
+
+.selectOneMenu {
+	width: 200px;
+}
+
+.selectOneMenuLarge {
+	width: 270px;
+}
+
+.selectOneMini {
+	width: 110px;
+}
+
+.selectOneMenuSrvc {
+	width: 280px;
+}
+
+.selectOneMenuExtraLarge {
+	width: 380px;
+}
+
+.selectOneMenu_Error {
+	
+}
+
+.selectManyMenu {
+	
+}
+
+.selectManyMenu_Error {
+	
+}
+
+.panelGroup {
+	
+}
+
+.panelGrid {
+	padding: 0px;
+	margin: 0px;
+}
+
+.dataTable {
+	empty-cells: show;
+}
+
+.headerClass {
+	background-color: ThreeDFace;
+	color: WindowText;
+	border-width: 1px;
+	border-style: solid;
+	border-color: ThreeDShadow;
+	margin: 2px;
+	padding: 0px;
+	padding-left: 4pt;
+	padding-right: 4pt;
+	padding-bottom: 2px;
+	font-weight: 400;
+	overflow: -moz-scrollbars-none;
+}
+
+.footerClass {
+	background-color: ThreeDFace;
+	color: WindowText;
+	border-width: 0px;
+	border-style: none;
+	padding: 0px;
+	padding-left: 4pt;
+	padding-right: 4pt;
+	font-weight: 400;
+	overflow: -moz-scrollbars-none;
+}
+
+.rowClass1 {
+	background-color: window;
+}
+
+.rowClass2 {
+	background-color: ThreeDFace;
+}
+
+.columnClass1 {
+	background-color: window;
+	margin: 2px;
+	padding: 0px;
+	padding-left: 4pt;
+	padding-right: 4pt;
+	padding-bottom: 2px;
+	overflow: -moz-scrollbars-none;
+}
+
+.columnClass2 {
+	background-color: ThreeDFace;
+	margin: 2px;
+	padding: 0px;
+	padding-left: 4pt;
+	padding-right: 4pt;
+	padding-bottom: 2px;
+}
+
+.header {
+	width: 98%;
+}
+
+.footer {
+	width: 100%;
+	text-align: center;
+	font-size: xx-small;
+	color: #A2A2A2;
+}
+
+.outerPanel {
+	width: 95%;
+	min-width: 900px;
+}
+
+.body {
+	width: 100%;
+}
+
+.bodyHeader {
+	text-align: left;
+}
+
+.bodyPanel {
+	width: 98%;
+}
+
+.menuToolBar {
+	width: 100%;
+	height: 30px;
+}
+
+.menuGroup {
+	
+}
+
+.menuItem {
+	
+}
+
+.errorClass {
+	font-weight: bold;
+	color: #BF0000;
+}
+
+.infoClass {
+	font-weight: bold;
+	color: #E5973E;
+}
+
+.tool {
+	height: 5px;
+	border-width: 1px;
+	text-align: center;
+	padding: 10px;
+}
+
+.toolTip {
+	background: #ffc;
+	border-width: 1px;
+	border-color: #D4D5AA;
+	padding: 2px;
+	height: 100px;
+	width: 700px;
+	z-index: 100;
+}
+
+.toolUpload {
+	height: 5px;
+	border-width: 1px;
+	text-align: center;
+	padding: 10px;
+}
+
+/**
+* Шрифтове за цялото приложение
+*/
+td {
+	font-size: 10pt;
+}
+
+input {
+	font-size: 10.5pt;
+}
+
+select {
+	font-size: 10.5pt;
+}
+
+textarea {
+	font-size: 10.5pt;
+}
+
+.ctxResultsTooglePanel {
+	height: 200px;
+	width: 395px;
+}
+
+.ctxStdVersionsResultsTooglePanel {
+	height: 350px;
+	width: 950px;
+}
+
+.ctxCriteriaPanel {
+	width: 950px;
+}
+
+.ctxResultsTextArea {
+	width: 200px;
+	height: 30px;
+}
+
+.registerResultsTooglePanel {
+	height: 500px;
+}
+
+.headerBg {
+	background-repeat: repeat-x;
+	background-image: url('images/bgHeader.png');
+	vertical-align: top;
+	min-width: 100%;
+	width: 100%;
+	height: 63px;
+	text-align: left;
+}
+
+.logoPanel {
+	text-align: center;
+	vertical-align: bottom;
+	margin: auto 0;
+}
+
+.logoText {
+	font-size: 30pt;
+	font-weight: bold;
+	color: #1276A9;
+	text-align: center;
+	text-transform: uppercase;
+	font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+.userInfo {
+	font-size: 10pt;
+	color: #2490BF;
+}
+
+.userInfoMsg {
+	font-size: 10pt;
+	color: #2490BF;
+	text-align: center;
+}
+
+.hide {
+	display: none;
+}
+
+.treePanel {
+	width: 900px;
+}
+
+.panelErrMsg {
+	text-align: center;
+}
+
+.rich-datascr {
+	background-color: #f1f1f1;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #C0C0C0;
+	border-width: 1px;
+}
+
+.rich-datascr-button {
+	color: #CD6600;
+}
+
+.rich-datascr-act {
+	color: #CD6600;
+	font-weight: bold;
+}
+
+.rich-datascr-inact {
+	color: #C0C0C0;
+}
+
+.rich-datascr-button-dsbld {
+	color: #C0C0C0;
+}
+
+.commandButtonKO {
+	width: 210px;
+}
+
+.modalPanel {
+	width: 400;
+	height: 150px;
+}
+
+/* колона 1 от таблицата със сертификатите в екраните за потребители */
+.certViewCol1 {
+	width: 25px;
+}
+
+/* колона 2 от таблицата със сертификатите в екраните за потребители */
+.certViewCol2 {
+	width: 250px;
+}
+
+/* колона 1 от таблицата за преглед на сертификат в екраните за потребители */
+.certViewLabelCol {
+	width: 80px;
+	margin-right: 2px;
+}
+
+/* колона 2 от таблицата за преглед на сертификат в екраните за потребители */
+.certViewValueCol {
+	width: 240px;
+}
+
+/* fix за по-добър вид на таблицата за ъплоуд на сертификат */
+.rich-fileupload-table-td {
+	border: none;
+}
+
+.optionsLabel {
+	border: 3px solid #E3E3E3;
+}
+
+.optionsLabelOver {
+	border: 3px solid #B6B6B6;
+	cursor: pointer;
+}
+
+.columnChoose {
+	width: 20px;
+}
+
+.columnDate {
+	width: 100px;
+}
+
+.dataTableRowMouseOver {
+	background-color: #FAE6B0;
+}
+
+.dataTableRowMouseOut {
+	background-color: #F8F8F8;
+}
+
+.treeStyle {
+	overflow: scroll;
+	width: 250px;
+}
+
+.addressFilterPanel {
+	width: 500px;
+}
+
+.toolTip {
+	height: 5px;
+	border-width: 1px;
+	text-align: center;
+	padding: 10px;
+}
+
+.cols {
+	vertical-align: top;
+}
+
+.dlgTooglePanel {
+	height: 430px;
+}
+
+.contactsFilterPanel {
+	height: 380px;
+	width: 450px;
+}
+
+.ctxResultsTooglePanel {
+	height: 200px;
+	width: 350px;
+}
+
+.receiversPanel {
+	height: 280px;
+}
+
+.dlgTooglePanelTable {
+	height: 200px;
+}
