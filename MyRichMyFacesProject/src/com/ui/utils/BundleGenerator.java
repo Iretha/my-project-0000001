@@ -9,26 +9,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-public class BundleHelper {
-
-	/**
-	 * Разделител на име на файл
-	 */
-	public static String FILE_EXTENSION_SEPARATOR = ".";
-
-	public static String SOURCE_FILE_EXTENSION = "txt";
+public class BundleGenerator {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String destDir = "C:/prj/MyRichMyFacesProject/src/com/ui/bundle/";
-		String sourceFileName = "WebMessages";
-		File f = new File(destDir + sourceFileName + FILE_EXTENSION_SEPARATOR
-				+ SOURCE_FILE_EXTENSION);
+		String destDir = "D:/Programming/Projects/prj1/MyRichMyFacesProject/src/com/ui/bundle/";
+		String sourceFileName = "WebMessages.txt";
+		File f = new File(destDir + sourceFileName);
 		BufferedReader reader = null;
-		// StringBuilder enContent = new StringBuilder();
-		// StringBuilder bgContent = new StringBuilder();
 		try {
 			char separator = 0;
 			String targetFileName = null;
@@ -44,12 +34,15 @@ public class BundleHelper {
 				if (cnt == 1) {
 					separator = line.charAt(0);
 					if (separator == 0) {
-						System.err.append("На първият ред трябва да е посочен разделител.");
+						System.err
+								.append("На първият ред трябва да е посочен разделител.");
 					}
-					targetFileName = subs[0];
-					targetFileExtension = subs[1];
-					for (int i = 2; i < subs.length; i++) {
-						locales[i - 2] = subs[i];
+					subs = line.split(new String(new char[] { separator }));
+					targetFileName = subs[1];
+					targetFileExtension = subs[2];
+					locales = new String[subs.length - 3];
+					for (int i = 3; i < subs.length; i++) {
+						locales[i - 3] = subs[i];
 					}
 					contents = new StringBuilder[locales.length];
 				} else {
@@ -64,54 +57,48 @@ public class BundleHelper {
 											+ wordCount
 											+ " думи с разделител \""
 											+ separator
-											+ "\". Думита са ключ и превод за всеки един от посочените local-и. \n");
+											+ "\". Думите са ключ и превод за всеки един от посочените local-и. \n");
 						} else {
 
 							for (int x = 0; x < locales.length; x++) {
-								// TODO
 								if (contents[x] == null) {
 									StringBuilder b = new StringBuilder();
 									contents[x] = b;
 								}
+								if (locales[x].equalsIgnoreCase("_bg")) {
+									contents[x].append(subs[0] + "="
+											+ convertToHexString(subs[x + 1]));
+								} else {
+									contents[x].append(subs[0] + "="
+											+ subs[x + 1]);
+								}
+
+								contents[x].append(System
+										.getProperty("line.separator"));
 							}
-
-							// enContent.append(subs[0] + "=" + subs[1]);
-							// enContent.append(System.getProperty("line.separator"));
-							// bgContent.append(subs[0] + "=" +
-							// convertToHexString(subs[2]));
-							// bgContent.append(System.getProperty("line.separator"));
 						}
-
 					}
-
 				}
 			}
 
-			// String fullFilePath = destDir + targetFileName + enLocale +
-			// targetFileExtension;
-			// if (enContent.length() > 0) {
-			// writeFile(enContent, fullFilePath);
-			// }
-			//
-			// if (bgContent.length() > 0) {
-			// fullFilePath = destDir + targetFileName + bgLocale +
-			// targetFileExtension;
-			// writeFile(bgContent, fullFilePath);
-			// }
+			for (int x = 0; x < locales.length; x++) {
+				if (contents[x].length() > 0) {
+					writeFile(contents[x], destDir + targetFileName
+							+ locales[x] + targetFileExtension);
+				}
+			}
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.append("Липсва търсеният файл " + destDir
+					+ sourceFileName);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.append("Проблем с " + destDir + sourceFileName);
 		} finally {
 			if (reader != null) {
 				try {
 					reader.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.err.append("Четецът не може да бъде затворен!");
 				}
 			}
 		}
@@ -126,19 +113,16 @@ public class BundleHelper {
 			output.flush();
 			System.out.println("File " + fileName + " generated!");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.append("Проблем с " + fileName);
 		} finally {
 			try {
 				if (output != null) {
 					output.close();
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.err.append("Писецът не може да бъде затворен! :)");
 			}
 		}
-
 	}
 
 	/**
@@ -153,7 +137,8 @@ public class BundleHelper {
 		for (char c : chars) {
 			int charToInt = (int) c;
 			if (Character.isLetter(c)) {
-				if (charToInt >= 65 && charToInt <= 90 || charToInt >= 97 && charToInt <= 122) {
+				if (charToInt >= 65 && charToInt <= 90 || charToInt >= 97
+						&& charToInt <= 122) {
 					output.append(c);
 				} else {
 					output.append(ap);
