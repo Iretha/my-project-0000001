@@ -13,28 +13,42 @@ import java.util.Properties;
 
 public class BundleGenerator {
 	private static String BUNDLE_KEY = "BUNDLE";
-	private static String SOURCE_FILE_NAME_KEY = "SOURCE_FILE_NAME";
+	private static String SOURCE_FILE_EXTENSION = "SOURCE_FILE_EXTENSION";
 	private static String PROP_FILE = "src\\bundle_generator_config.properties";
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String destinationDir = null;
+		String destinationDirPath = null;
 		Properties properties = new Properties();
 		String bundlePackage = null;
-		String sourceFileName = null;
+		String sourceFileExt = null;
 		try {
 			properties.load(new FileInputStream(PROP_FILE));
 			bundlePackage = properties.getProperty(BUNDLE_KEY);
-			sourceFileName = properties.getProperty(SOURCE_FILE_NAME_KEY);
-			destinationDir = new File(".").getCanonicalPath() + bundlePackage;
+			sourceFileExt = properties.getProperty(SOURCE_FILE_EXTENSION);
+			destinationDirPath = new File(".").getCanonicalPath()
+					+ bundlePackage;
+			File destinationDir = new File(destinationDirPath);
+			File[] files = null;
+			if (destinationDir.exists() && destinationDir.isDirectory()) {
+				files = destinationDir.listFiles();
+				for (File curr : files) {
+					if (curr.getAbsolutePath().toLowerCase()
+							.endsWith(sourceFileExt.toLowerCase())) {
+						generateBundleFiles(destinationDirPath, curr);
+					}
+				}
+			}
 		} catch (IOException e) {
 			System.err
 					.append("Възникна грешка при опит за изчитане на текущата директория.");
 		}
+	}
 
-		File sourceFile = new File(destinationDir + sourceFileName);
+	private static void generateBundleFiles(String destinationDir,
+			File sourceFile) {
 		BufferedReader reader = null;
 		try {
 			char separator = 0;
@@ -118,7 +132,6 @@ public class BundleGenerator {
 				}
 			}
 		}
-
 	}
 
 	public static void writeFile(StringBuilder builder, String fileName) {
@@ -163,9 +176,7 @@ public class BundleGenerator {
 			} else {
 				output.append(c);
 			}
-
 		}
 		return output.toString();
 	}
-
 }
