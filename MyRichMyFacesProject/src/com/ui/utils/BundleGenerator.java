@@ -10,21 +10,22 @@ import java.io.IOException;
 import java.io.Writer;
 
 public class BundleGenerator {
-
+	private static String BUNDLE_PACKAGE = "\\src\\com\\ui\\bundle\\";
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String destDir = null;
+		String sourceFilePath = null;
+		String sourceFileName = "WebMessages.txt";
 		try {
-			destDir = new File(".").getCanonicalPath()
-					+ "\\src\\com\\ui\\bundle\\";
+			sourceFilePath = new File(".").getCanonicalPath() + BUNDLE_PACKAGE
+					+ sourceFileName;
 		} catch (IOException e1) {
 			System.err
 					.append("Възникна грешка при опит за изчитане на текущата директория.");
 		}
-		String sourceFileName = "WebMessages.txt";
-		File f = new File(destDir + sourceFileName);
+
+		File f = new File(sourceFilePath);
 		BufferedReader reader = null;
 		try {
 			char separator = 0;
@@ -90,16 +91,15 @@ public class BundleGenerator {
 
 			for (int x = 0; x < locales.length; x++) {
 				if (contents[x].length() > 0) {
-					writeFile(contents[x], destDir + targetFileName
+					writeFile(contents[x], sourceFilePath + targetFileName
 							+ locales[x] + targetFileExtension);
 				}
 			}
 
 		} catch (FileNotFoundException e) {
-			System.err.append("Липсва търсеният файл " + destDir
-					+ sourceFileName);
+			System.err.append("Липсва търсеният файл " + sourceFilePath);
 		} catch (IOException e) {
-			System.err.append("Проблем с " + destDir + sourceFileName);
+			System.err.append("Проблем с " + sourceFilePath);
 		} finally {
 			if (reader != null) {
 				try {
