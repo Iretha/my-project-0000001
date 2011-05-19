@@ -11,3 +11,14 @@ JSF Mojarra v1.2
 HOT SPOTS:
 %GERONIMO_HOME%\var\config\config.xml
 %GERONIMO_HOME%\var\repository\default
+%GERONIMO_HOME%\var\activemq\conf\activemq.xml
+
+
+GERONIMO SETTINGS:
+0)stop app. server
+1)delete all content of %GERONIMO_HOME%\var\repository\default
+2)remove last lines containing name of your applications
+3)check %GERONIMO_HOME%\var\activemq\conf\activemq.xml: 
+-useShutdownHook="false" 
+-start="false" 
+-schedulerSupport="false" 
