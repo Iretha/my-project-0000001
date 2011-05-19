@@ -22,14 +22,14 @@
 			<jsp:include page="/pages/common/header.jsp" />
 			<jsp:include page="/pages/common/locale.jsp" />
 			<jsp:include page="/pages/common/status.jsp" />
-			<rich:panel header="#{msg.LOGIN}">
+			<rich:panel header="#{msg.LOGIN_LOGIN}">
 				<a4j:form id="formLogin">
 					<h:panelGrid columns="1">
 						<h:outputText value="#{msg.LOGIN_USERNAME}" />
 						<h:inputText />
 						<h:outputText value="#{msg.LOGIN_PWD}" />
 						<h:inputSecret />
-						<a4j:commandButton value="#{msg.LOGIN}" id="btnLogin"
+						<a4j:commandButton value="#{msg.LOGIN_LOGIN}" id="btnLogin"
 							styleClass="commandButton" type="submit" />
 					</h:panelGrid>
 					<rich:messages infoClass="infoClass" errorClass="errorClass" />

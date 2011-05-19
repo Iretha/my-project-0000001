@@ -2,4 +2,4 @@
 #LOGIN PAGE MESSAGES
 LOGIN_USERNAME#Username#Потребителско име
 LOGIN_PWD#Password#Парола
-LOGIN#Login#Вход
+LOGIN_LOGIN#Login#Вход
