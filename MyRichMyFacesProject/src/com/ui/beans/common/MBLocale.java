@@ -22,7 +22,7 @@ public class MBLocale {
 	private void initLocales() {
 		Application app = FacesContext.getCurrentInstance().getApplication();
 		Locale defaultLocale = app.getDefaultLocale();
-		FacesContext.getCurrentInstance().getViewRoot().setLocale(defaultLocale); 
+		FacesContext.getCurrentInstance().getViewRoot().setLocale(defaultLocale);
 		this.selectedLocaleAbbr = defaultLocale.getISO3Language();
 		this.supportedLocales = new ArrayList<Locale>();
 		Iterator<Locale> supportedLocalesIt = app.getSupportedLocales();
@@ -47,5 +47,4 @@ public class MBLocale {
 	public void setSelectedLocaleAbbr(String selectedLocaleAbbr) {
 		this.selectedLocaleAbbr = selectedLocaleAbbr;
 	}
-
 }
