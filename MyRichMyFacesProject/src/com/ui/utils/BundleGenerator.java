@@ -12,7 +12,7 @@ import java.io.Writer;
 import java.util.Properties;
 
 public class BundleGenerator {
-	private static String BUNDLE_KEY = "BUNDLE";
+	private static String BUNDLE_KEY = "BUNDLE_PACKAGE";
 	private static String SOURCE_FILE_EXTENSION = "SOURCE_FILE_EXTENSION";
 	private static String PROP_FILE = "src\\bundle_generator_config.properties";
 
@@ -28,6 +28,16 @@ public class BundleGenerator {
 			properties.load(new FileInputStream(PROP_FILE));
 			bundlePackage = properties.getProperty(BUNDLE_KEY);
 			sourceFileExt = properties.getProperty(SOURCE_FILE_EXTENSION);
+			if (bundlePackage == null) {
+				System.err.append("Във файлa " + PROP_FILE
+						+ " трябва да има добавен ключ " + BUNDLE_KEY + ".");
+			}
+
+			if (sourceFileExt == null) {
+				System.err.append("Във файлa " + PROP_FILE
+						+ " трябва да има добавен ключ "
+						+ SOURCE_FILE_EXTENSION + ".");
+			}
 			destinationDirPath = new File(".").getCanonicalPath()
 					+ bundlePackage;
 			File destinationDir = new File(destinationDirPath);
