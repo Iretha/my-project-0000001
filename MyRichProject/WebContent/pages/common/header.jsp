@@ -14,7 +14,7 @@
 		<h:panelGrid columns="1" cellpadding="0" cellspacing="0"
 			styleClass="logoPanel">
 			<h:outputText
-				value="HEADER"
+				value=""
 				styleClass="logoText"></h:outputText>
 		</h:panelGrid>
 		<h:panelGrid columns="1" cellpadding="0" cellspacing="0"
