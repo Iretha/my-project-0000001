@@ -15,7 +15,14 @@ public class BundleGenerator {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String destDir = "D:/Programming/Projects/prj1/MyRichMyFacesProject/src/com/ui/bundle/";
+		String destDir = null;
+		try {
+			destDir = new File(".").getCanonicalPath()
+					+ "\\src\\com\\ui\\bundle\\";
+		} catch (IOException e1) {
+			System.err
+					.append("Възникна грешка при опит за изчитане на текущата директория.");
+		}
 		String sourceFileName = "WebMessages.txt";
 		File f = new File(destDir + sourceFileName);
 		BufferedReader reader = null;
