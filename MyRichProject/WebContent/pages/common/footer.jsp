@@ -9,7 +9,7 @@
 <%@ taglib uri="http://richfaces.org/rich" prefix="rich"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <f:subview id="svFooter">
-	<rich:panel id="footerPanel" styleClass="footer">
+	<rich:panel id="footerPanel" styleClass="footer" >
 		<h:outputText
 			value="©2011 FOOTER"
 			styleClass="footer"></h:outputText>

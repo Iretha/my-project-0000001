@@ -18,11 +18,11 @@
 <body onkeyup="clickOnEnter(event, 'formLogin:btnLogin');"
 	onkeypress="clickOnEnter(event, 'formLogin:btnLogin');">
 	<f:view>
-		<a4j:form id="formLogin">
-			<h:panelGrid columns="1" styleClass="outerPanel" id="outerPanel">
-				<jsp:include page="/pages/common/header.jsp" />
-				<jsp:include page="/pages/common/status.jsp" />
-				<rich:panel header="Вход">
+		<h:panelGrid columns="1" styleClass="outerPanel" id="outerPanel">
+			<jsp:include page="/pages/common/header.jsp" />
+			<jsp:include page="/pages/common/status.jsp" />
+			<rich:panel header="Вход">
+				<a4j:form id="formLogin">
 					<h:panelGrid columns="1">
 						<h:outputText value="Потребителско име" />
 						<h:inputText />
@@ -32,10 +32,10 @@
 							styleClass="commandButton" />
 					</h:panelGrid>
 					<rich:messages infoClass="infoClass" errorClass="errorClass" />
-				</rich:panel>
-				<jsp:include page="/pages/common/footer.jsp" />
-			</h:panelGrid>
-		</a4j:form>
+				</a4j:form>
+			</rich:panel>
+			<jsp:include page="/pages/common/footer.jsp" />
+		</h:panelGrid>
 		<jsp:include page="/pages/common/errorDlg.jsp" />
 	</f:view>
 </body>
