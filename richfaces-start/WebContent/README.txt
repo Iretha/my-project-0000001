@@ -1,1 +1,1 @@
-URL: http://localhost:8080/richfaces-start/
+URL: http://localhost:8080/MyRichFaceletsProjectJSPX/
