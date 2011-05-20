@@ -17,12 +17,12 @@
 		</h:panelGrid>
 		<h:panelGrid columns="1" cellpadding="0" cellspacing="0"
 			style="margin: auto 0;" width="660">
-			<h:graphicImage value="/theme/images/header.png"></h:graphicImage>
+			<h:graphicImage value="/theme/images/header.png" alt="header"></h:graphicImage>
 		</h:panelGrid>
 
 		<h:panelGrid columns="1" cellpadding="0" cellspacing="0"
 			style="margin: auto 0;">
-			<h:graphicImage value="/theme/images/header_right.png"></h:graphicImage>
+			<h:graphicImage value="/theme/images/header_right.png" alt="header"></h:graphicImage>
 		</h:panelGrid>
 	</h:panelGrid>
 </f:subview>
