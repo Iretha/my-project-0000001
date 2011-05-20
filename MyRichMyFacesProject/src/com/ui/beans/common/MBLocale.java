@@ -12,7 +12,6 @@ import javax.faces.context.FacesContext;
 
 import org.ajax4jsf.component.UIActionParameter;
 import org.ajax4jsf.component.html.HtmlAjaxCommandLink;
-
 import com.ui.helpers.UIHelper;
 import com.ui.utils.ManagedBeans;
 
