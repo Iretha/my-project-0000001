@@ -100,51 +100,7 @@ function clickOnEnter(e, onEnterBtnId){
        }
        return false;
    }
-  
-    /**
-	 * 
-	 * @param btnIdToSet
-	 * @return true/false
-	 */
-  function setHiddenBtnSearchId(btnIdToSet){
-	  var hiddenVal = document.getElementById(func_getFieldIdByType('input', 'hiddenBtnSearchId'));
-	 // alert(hiddenVal);
-	  if(hiddenVal){
-		  hiddenVal.value = btnIdToSet;
-		 // alert(hiddenVal.value);
-		  return true;
-	  }
-	  
-	  return false;
-  }
-     
- /**
-	 * 
-	 * @param e
-	 * @param hiddenBtnFiledId
-	 * @return true/false
-	 */
- function doSearchOnEnterInCtx(e){
-	  var key;
-	  var btnToClick;
-      if(window.event){
-          key = window.event.keyCode;     // IE
-      } else{
-          key = e.which;     // firefox
-      }
-      if (key == 13){
-    	var hiddenField = document.getElementById(func_getFieldIdByType('input', 'hiddenBtnSearchId'));
-    	 if(hiddenField){
-    		 // alert(hiddenField.value);
-         	   btnToClick = document.getElementById(func_getFieldIdByType('input', hiddenField.value));
-    	   		 if (btnToClick) {
-    	   			 btnToClick.click();
-    	   			 return true;
-    	   		 }
-    	 }
-      }
-	return false;
-}
+   
       
   /**
 	 * 
@@ -159,22 +115,7 @@ function clickOnEnter(e, onEnterBtnId){
     		  }
     	  }
       }
-  }
-
-   /**
-	 * Избран KO
-	 * 
-	 * @param selectedRow
-	 * @param dlgId
-	 * @param msg
-	 */
-   function isKOSelected(selectedRow, dlgId, msg) {
-   	if (selectedRow > -1) {
-   		Richfaces.showModalPanel(dlgId);
-   	} else {
-   		alert(msg);
-   	}
-   }  
+  } 
     
     function isEmptyField (fieldId){
     	var text = document.getElementById(func_getFieldIdByType('input', fieldId));

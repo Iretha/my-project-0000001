@@ -21,5 +21,4 @@
 			<h:graphicImage value="/theme/images/loading.gif" />
 		</h:panelGrid>
 	</rich:modalPanel>
-	<h:inputHidden id="hiddenBtnSearchId"></h:inputHidden>
 </f:subview>

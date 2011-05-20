@@ -4,6 +4,7 @@
 package com.ui.utils;
 
 import com.ui.beans.common.MBError;
+import com.ui.beans.common.MBLocale;
 import com.ui.beans.common.MBProgressBar;
 
 /**
@@ -22,7 +23,12 @@ public enum ManagedBeans {
 	/**
 	 * Прогрес
 	 */
-	progressBar(MBProgressBar.class);
+	progressBar(MBProgressBar.class),
+
+	/**
+	 * 
+	 */
+	locale(MBLocale.class);
 
 	private Class<? extends Object> cls;
 

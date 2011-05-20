@@ -10,17 +10,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <f:subview id="svLocale">
 	<a4j:form id="formLocale">
+		<h:panelGrid binding="#{locale.localeGrid}"></h:panelGrid>
+
 		<h:panelGrid columns="2">
 			<a4j:commandLink value="ENG" action="#{locale.changeLocale}"
 				title="ENG" reRender="outerPanel">
-				<a4j:actionparam name="eng" assignTo="#{locale.selectedLocaleAbbr}"
-					value="eng" />
+				<a4j:actionparam id="parameterEng" name="eng"
+					assignTo="#{locale.selectedLocaleAbbr}" value="eng" />
 			</a4j:commandLink>
 			<a4j:commandLink value="BUL" action="#{locale.changeLocale}"
 				title="BUL" reRender="outerPanel">
-				<a4j:actionparam name="bul" assignTo="#{locale.selectedLocaleAbbr}"
-					value="bul" />
+				<a4j:actionparam id="parameterBul" name="bul"
+					assignTo="#{locale.selectedLocaleAbbr}" value="bul" />
 			</a4j:commandLink>
 		</h:panelGrid>
+
 	</a4j:form>
 </f:subview>
