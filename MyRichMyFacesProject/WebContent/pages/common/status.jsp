@@ -18,7 +18,7 @@
 		<f:facet name="header">
 		</f:facet>
 		<h:panelGrid columns="1">
-			<h:graphicImage value="/theme/images/loading.gif" />
+			<h:graphicImage value="/theme/images/loading.gif" alt="loading..." />
 		</h:panelGrid>
 	</rich:modalPanel>
 </f:subview>

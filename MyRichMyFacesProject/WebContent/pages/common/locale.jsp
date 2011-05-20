@@ -14,12 +14,12 @@
 
 		<h:panelGrid columns="2">
 			<a4j:commandLink value="ENG" action="#{locale.changeLocale}"
-				title="ENG" reRender="outerPanel">
+				title="ENG" reRender="outerPanel" id="link_engl">
 				<a4j:actionparam id="parameterEng" name="eng"
 					assignTo="#{locale.selectedLocaleAbbr}" value="eng" />
 			</a4j:commandLink>
 			<a4j:commandLink value="BUL" action="#{locale.changeLocale}"
-				title="BUL" reRender="outerPanel">
+				title="BUL" reRender="outerPanel" id="link_bulg">
 				<a4j:actionparam id="parameterBul" name="bul"
 					assignTo="#{locale.selectedLocaleAbbr}" value="bul" />
 			</a4j:commandLink>
