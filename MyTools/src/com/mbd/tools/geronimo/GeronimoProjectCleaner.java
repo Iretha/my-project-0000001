@@ -45,32 +45,30 @@ public class GeronimoProjectCleaner {
 			clearConfigFile(geronimoLocation);
 			clearRepositoryDir(geronimoLocation);
 		} else {
-			System.err.append("Не е открита променлива за " + GERONIMO_HOME + ". /n");
+			System.err.append("Не е открита променлива за " + GERONIMO_HOME + ". \n");
 		}
 	}
 
 	private static void clearRepositoryDir(String geronimoLocation) {
-		boolean smthCleaned = false;
 		File repository = new File(geronimoLocation + GERONIMO_APP_DIR + "\\"
 				+ GERONIMO_WEB_APP_DIR);
-		System.out.println("===================================");
-		System.out.println("Trying to clean  " + repository.getAbsolutePath() + " ...");
-		if (repository.exists() && repository.isDirectory()) {
-			File[] contents = repository.listFiles();
-			if (contents.length > 0) {
-				System.out.println("Files to be removed " + contents.length);
-				for (File f : contents) {
-					if (f.delete()) {
-						smthCleaned = true;
-					}
-				}
-			} else {
-				System.out.println("Nothing to remove...");
-			}
-		}
-		if (!smthCleaned) {
+		if (!deleteDirectory(repository)) {
 			System.out.println("Nothing removed...");
 		}
+	}
+
+	private static boolean deleteDirectory(File path) {
+		if (path.exists()) {
+			File[] files = path.listFiles();
+			for (int i = 0; i < files.length; i++) {
+				if (files[i].isDirectory()) {
+					deleteDirectory(files[i]);
+				} else {
+					files[i].delete();
+				}
+			}
+		}
+		return (path.delete());
 	}
 
 	private static void clearConfigFile(String geronimoLocation) {
