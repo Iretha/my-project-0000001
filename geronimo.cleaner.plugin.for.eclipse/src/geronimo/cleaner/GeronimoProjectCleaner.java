@@ -34,20 +34,27 @@ public class GeronimoProjectCleaner {
 
 	private static final String GERONIMO_CONF_ATTRIBUTES_TAG = "attributes";
 
-	public static void clearRepositoryDir(String geronimoLocation) {
+	public static boolean clearRepositoryDir(String geronimoLocation) {
 		File repository = new File(geronimoLocation + GERONIMO_APP_DIR + "\\"
 				+ GERONIMO_WEB_APP_DIR);
-		if (repository.exists() && repository.isDirectory()) {
-			File[] contents = repository.listFiles();
-			if (contents.length > 0) {
-				for (File f : contents) {
-					f.delete();
+		return deleteDirectory(repository);
+	}
+
+	private static boolean deleteDirectory(File path) {
+		if (path.exists()) {
+			File[] files = path.listFiles();
+			for (int i = 0; i < files.length; i++) {
+				if (files[i].isDirectory()) {
+					deleteDirectory(files[i]);
+				} else {
+					files[i].delete();
 				}
 			}
 		}
+		return (path.delete());
 	}
 
-	public static void clearConfigFile(String geronimoLocation) throws CleanerException {
+	public static boolean clearConfigFile(String geronimoLocation) throws CleanerException {
 		System.out.println("===================================");
 		File config = new File(geronimoLocation + GERONIMO_CONFIG_FILE);
 		System.out.println("Looking for modules in " + config.getAbsolutePath() + " ...");
@@ -94,6 +101,8 @@ public class GeronimoProjectCleaner {
 		if (smthFound) {
 			serializeConfiguration(config, confDoc);
 		}
+
+		return smthFound;
 	}
 
 	/**

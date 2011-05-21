@@ -32,24 +32,23 @@ public class CleanHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		String msg = null;
-		try{
-			runCleaner();
-		}catch (CleanerException e) {
+		boolean rowsDeleted = false;
+		boolean cacheFolderDeleted = false;
+		try {
+			String geronimoLocation = getEnvironmentProp(GeronimoProjectCleaner.GERONIMO_HOME);
+			if (geronimoLocation != null) {
+				rowsDeleted = GeronimoProjectCleaner.clearConfigFile(geronimoLocation);
+				cacheFolderDeleted = GeronimoProjectCleaner.clearRepositoryDir(geronimoLocation);
+			} else {
+				throw new ClassCastException("Не е открита променлива за "
+						+ GeronimoProjectCleaner.GERONIMO_HOME + ".");
+			}
+		} catch (CleanerException e) {
 			msg = e.getMessage();
 		}
-		MessageDialog.openInformation(window.getShell(), "Geronimo Cleaner", msg != null ? msg : "Well done!");
+		MessageDialog.openInformation(window.getShell(), "Geronimo Cleaner", msg != null ? msg
+				: "Well done!");
 		return null;
-	}
-
-	private void runCleaner() throws CleanerException {
-		String geronimoLocation = getEnvironmentPropGERONIMO_HOME();
-		if (geronimoLocation != null) {
-			GeronimoProjectCleaner.clearConfigFile(geronimoLocation);
-			GeronimoProjectCleaner.clearRepositoryDir(geronimoLocation);
-		} else {
-			throw new ClassCastException("Не е открита променлива за "
-					+ GeronimoProjectCleaner.GERONIMO_HOME + ".");
-		}
 	}
 
 	/**
@@ -57,9 +56,9 @@ public class CleanHandler extends AbstractHandler {
 	 * 
 	 * @return Properties
 	 */
-	public String getEnvironmentPropGERONIMO_HOME() {
-		if (System.getenv().containsKey(GeronimoProjectCleaner.GERONIMO_HOME)) {
-			return System.getenv(GeronimoProjectCleaner.GERONIMO_HOME);
+	public String getEnvironmentProp(String propKey) {
+		if (System.getenv().containsKey(propKey)) {
+			return System.getenv(propKey);
 		}
 		return null;
 	}
