@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Cleaner
+Bundle-SymbolicName: geronimo.cleaner.plugin.for.eclipse;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: geronimo.cleaner.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.apache.xml.serialize;version="2.9.0"
