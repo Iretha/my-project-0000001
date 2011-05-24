@@ -1,5 +1,7 @@
 package geronimo.cleaner;
 
+import geronimo.cleaner.exc.CleanerException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

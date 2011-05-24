@@ -1,7 +1,7 @@
 /**
  * 
  */
-package geronimo.cleaner;
+package geronimo.cleaner.exc;
 /**
  * Изключения възникнали по време на изчистване на кешираните приложения.
  * @author MBD

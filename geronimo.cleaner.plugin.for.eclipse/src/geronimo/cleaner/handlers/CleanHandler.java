@@ -1,6 +1,6 @@
 package geronimo.cleaner.handlers;
 
-import geronimo.cleaner.CleanerException;
+import geronimo.cleaner.exc.CleanerException;
 import static geronimo.cleaner.GeronimoProjectCleaner.*;
 
 import org.eclipse.core.commands.AbstractHandler;
