@@ -11,25 +11,17 @@
       <command
             name="Run Geronimo Cleaner"
             categoryId="geronimo.cleaner.commands.category"
-            id="geronimo.cleaner.commands.sampleCommand">
+            id="geronimo.cleaner.commands.cleanhandler">
       </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            commandId="geronimo.cleaner.commands.sampleCommand"
+            commandId="geronimo.cleaner.commands.cleanhandler"
             class="geronimo.cleaner.handlers.CleanHandler">
       </handler>
    </extension>
-   <extension
-         point="org.eclipse.ui.bindings">
-      <key
-            commandId="geronimo.cleaner.commands.sampleCommand"
-            contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+6"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
-      </key>
-   </extension>
+
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
@@ -37,11 +29,11 @@
          <menu
                label="Custom Plugins"
                mnemonic="M"
-               id="geronimo.cleaner.menus.sampleMenu">
+               id="geronimo.cleaner.menus.customMenu">
             <command
-                  commandId="geronimo.cleaner.commands.sampleCommand"
+                  commandId="geronimo.cleaner.commands.cleanhandler"
                   mnemonic="S"
-                  id="geronimo.cleaner.menus.sampleCommand">
+                  id="geronimo.cleaner.menus.cleaner">
             </command>
          </menu>
       </menuContribution>
@@ -50,7 +42,7 @@
          <toolbar
                id="geronimo.cleaner.toolbars.sampleToolbar">
             <command
-                  commandId="geronimo.cleaner.commands.sampleCommand"
+                  commandId="geronimo.cleaner.commands.cleanhandler"
                   icon="icons/mrclean.png"
                   tooltip="Clean That Dirty Geronimo!"
                   id="geronimo.cleaner.toolbars.sampleCommand">
