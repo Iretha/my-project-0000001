@@ -15,10 +15,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
 /**
  * 
  * @author MBD
- *
+ * 
  */
 @SuppressWarnings("deprecation")
 public class GeronimoProjectCleaner {
@@ -38,15 +39,17 @@ public class GeronimoProjectCleaner {
 
 	private static final String GERONIMO_CONF_ATTRIBUTES_TAG = "attributes";
 
+	private static final String FILE_PATH_SEPARATOR = "\\";
+
 	public static boolean clearRepositoryDir(String geronimoLocation) throws CleanerException {
-		File repository = new File(geronimoLocation + "\\" + GERONIMO_APP_DIR + "\\"
-				+ GERONIMO_WEB_APP_DIR);
+		File repository = new File(geronimoLocation + FILE_PATH_SEPARATOR + GERONIMO_APP_DIR
+				+ FILE_PATH_SEPARATOR + GERONIMO_WEB_APP_DIR);
 		return deleteDirectory(repository);
 	}
 
-	private static boolean deleteDirectory(File path) throws CleanerException {
-		if (path.exists()) {
-			File[] files = path.listFiles();
+	private static boolean deleteDirectory(File file) throws CleanerException {
+		if (file.exists()) {
+			File[] files = file.listFiles();
 			for (int i = 0; i < files.length; i++) {
 				if (files[i].isDirectory()) {
 					deleteDirectory(files[i]);
@@ -55,15 +58,13 @@ public class GeronimoProjectCleaner {
 				}
 			}
 		} else {
-			throw new CleanerException("File does not exists: " + path.getAbsolutePath());
+			throw new CleanerException("File does not exists: " + file.getAbsolutePath());
 		}
-		return (path.delete());
+		return (file.delete());
 	}
 
 	public static boolean clearConfigFile(String geronimoLocation) throws CleanerException {
-		System.out.println("===================================");
 		File config = new File(geronimoLocation + GERONIMO_CONFIG_FILE);
-		System.out.println("Looking for modules in " + config.getAbsolutePath() + " ...");
 		boolean smthFound = false;
 		DocumentBuilder docBuilder = null;
 		Document confDoc = null;
@@ -89,7 +90,6 @@ public class GeronimoProjectCleaner {
 								if (moduleChild.getNodeValue().startsWith(GERONIMO_WEB_APP_DIR)) {
 									currAttribute.removeChild(currChild);
 									smthFound = true;
-									System.out.println("Removed " + moduleChild.getNodeValue());
 								}
 							}
 						}

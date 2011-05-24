@@ -1,7 +1,7 @@
 package geronimo.cleaner.handlers;
 
 import geronimo.cleaner.CleanerException;
-import geronimo.cleaner.GeronimoProjectCleaner;
+import static geronimo.cleaner.GeronimoProjectCleaner.*;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -36,20 +36,24 @@ public class CleanHandler extends AbstractHandler {
 		boolean rowsDeleted = false;
 		boolean cacheFolderDeleted = false;
 		try {
-			String geronimoLocation = getEnvironmentProp(GeronimoProjectCleaner.GERONIMO_HOME);
+			String geronimoLocation = getEnvironmentProp(GERONIMO_HOME);
 			if (geronimoLocation != null) {
-				rowsDeleted = GeronimoProjectCleaner.clearConfigFile(geronimoLocation);
-				cacheFolderDeleted = GeronimoProjectCleaner.clearRepositoryDir(geronimoLocation);
+				rowsDeleted = clearConfigFile(geronimoLocation);
+				cacheFolderDeleted = clearRepositoryDir(geronimoLocation);
 			} else {
-				throw new ClassCastException("Не е открита променлива за "
-						+ GeronimoProjectCleaner.GERONIMO_HOME + ".");
+				throw new ClassCastException("Environment variable not found: " + GERONIMO_HOME
+						+ ".");
 			}
 		} catch (CleanerException e) {
 			msg = e.getMessage();
 		}
-		MessageDialog.openInformation(window.getShell(), "Geronimo Cleaner", msg != null ? msg
-				: "Well done! " + "Rows removed: " + rowsDeleted + " Repository folder deleted: "
-						+ cacheFolderDeleted);
+		if (msg != null) {
+			MessageDialog.openError(window.getShell(), "Geronimo Cleaner", msg);
+		} else {
+			MessageDialog.openInformation(window.getShell(), "Geronimo Cleaner", "Done! "
+					+ "Config file cleaned: " + rowsDeleted + " Cache folder cleaned: "
+					+ cacheFolderDeleted);
+		}
 		return null;
 	}
 
