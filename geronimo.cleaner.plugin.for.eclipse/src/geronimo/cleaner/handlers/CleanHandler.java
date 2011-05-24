@@ -41,7 +41,7 @@ public class CleanHandler extends AbstractHandler {
 				rowsDeleted = clearConfigFile(geronimoLocation);
 				cacheFolderDeleted = clearRepositoryDir(geronimoLocation);
 			} else {
-				throw new ClassCastException("Environment variable not found: " + GERONIMO_HOME
+				throw new CleanerException("Environment variable not found: " + GERONIMO_HOME
 						+ ".");
 			}
 		} catch (CleanerException e) {
