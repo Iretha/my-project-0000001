@@ -22,7 +22,7 @@ public class GeronimoProjectCleaner {
 	/**
 	 * Конфигурационен файл на Geronimo
 	 */
-	private static final String GERONIMO_CONFIG_FILE = "var\\config\\config.xml";
+	private static final String GERONIMO_CONFIG_FILE = "\\var\\config\\config.xml";
 
 	public static final String GERONIMO_HOME = "GERONIMO_HOME";
 
