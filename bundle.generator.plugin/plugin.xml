@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
+         <command
+               commandId="bundle.generator.plugin.handlers.generatorhandler"
+               label="Generate bundle files..."
+               style="push">
+                <visibleWhen>
+              	 <with
+                     variable="activeMenuSelection">
+                  <iterate>
+                     <adapt
+                           type="org.eclipse.jdt.core.ICompilationUnit">
+                     </adapt></iterate>
+               </with>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="bundle.generator.plugin.handlers.GeneratorHandler"
+            id="bundle.generator.plugin.handlers.generatorhandler"
+            name="Bundle Generator">
+      </command>
+   </extension>
+</plugin>
