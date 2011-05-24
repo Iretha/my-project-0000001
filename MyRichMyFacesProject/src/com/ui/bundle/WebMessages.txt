@@ -1,4 +1,4 @@
-#WebMessages#.properties#_en#_bg
+#WebMessages#properties#en#bg
 #LOGIN PAGE MESSAGES
 LOGIN_USERNAME#Username#Потребителско име
 LOGIN_PWD#Password#Парола

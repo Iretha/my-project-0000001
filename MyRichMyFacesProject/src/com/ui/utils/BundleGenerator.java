@@ -82,10 +82,10 @@ public class BundleGenerator {
 					}
 					subs = line.split(new String(new char[] { separator }));
 					targetFileName = subs[1];
-					targetFileExtension = subs[2];
+					targetFileExtension = "." + subs[2];
 					locales = new String[subs.length - 3];
 					for (int i = 3; i < subs.length; i++) {
-						locales[i - 3] = subs[i];
+						locales[i - 3] = "_" + subs[i];
 					}
 					contents = new StringBuilder[locales.length];
 				} else {
