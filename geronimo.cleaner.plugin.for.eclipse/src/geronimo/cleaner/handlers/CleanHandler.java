@@ -62,7 +62,7 @@ public class CleanHandler extends AbstractHandler {
 	 * 
 	 * @return Properties
 	 */
-	public String getEnvironmentProp(String propKey) {
+	private String getEnvironmentProp(String propKey) {
 		if (System.getenv().containsKey(propKey)) {
 			return System.getenv(propKey);
 		}
