@@ -47,7 +47,8 @@ public class CleanHandler extends AbstractHandler {
 			msg = e.getMessage();
 		}
 		MessageDialog.openInformation(window.getShell(), "Geronimo Cleaner", msg != null ? msg
-				: "Well done!");
+				: "Well done! /n" + "Rows removed: " + rowsDeleted + "/n" +"Repository folder deleted: "
+						+ cacheFolderDeleted);
 		return null;
 	}
 
