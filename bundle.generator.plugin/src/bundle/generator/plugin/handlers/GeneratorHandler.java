@@ -22,6 +22,7 @@ import bundle.generator.plugin.generator.GeneratorException;
  */
 @SuppressWarnings("restriction")
 public class GeneratorHandler extends AbstractHandler {
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IStructuredSelection selection = (IStructuredSelection) HandlerUtil
@@ -49,8 +50,10 @@ public class GeneratorHandler extends AbstractHandler {
 					try {
 						BundleGenerator.generateBundleFiles(destinationDirectory, firstElement
 								.getLocation().toOSString());
+						MessageDialog.openInformation(HandlerUtil.getActiveShell(event),
+								"Information", "Done!");
 					} catch (GeneratorException e) {
-						MessageDialog.openError(HandlerUtil.getActiveShell(event), "Exception",
+						MessageDialog.openError(HandlerUtil.getActiveShell(event), "Runtime Exception",
 								e.getMessage());
 					}
 				}

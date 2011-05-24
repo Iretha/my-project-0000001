@@ -175,6 +175,7 @@ public class BundleGenerator {
 				output.append(c);
 			}
 		}
+		System.out.println(unicodeString + "->" + output.toString());
 		return output.toString();
 	}
 }
