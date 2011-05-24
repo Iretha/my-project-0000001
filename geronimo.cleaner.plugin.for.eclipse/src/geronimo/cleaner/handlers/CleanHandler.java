@@ -15,6 +15,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
  * 
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
+ * @author MBD
  */
 public class CleanHandler extends AbstractHandler {
 
@@ -47,7 +48,7 @@ public class CleanHandler extends AbstractHandler {
 			msg = e.getMessage();
 		}
 		MessageDialog.openInformation(window.getShell(), "Geronimo Cleaner", msg != null ? msg
-				: "Well done! /n" + "Rows removed: " + rowsDeleted + "/n" +"Repository folder deleted: "
+				: "Well done! " + "Rows removed: " + rowsDeleted + " Repository folder deleted: "
 						+ cacheFolderDeleted);
 		return null;
 	}

@@ -3,7 +3,8 @@
  */
 package geronimo.cleaner;
 /**
- * @author М
+ * Изключения възникнали по време на изчистване на кешираните приложения.
+ * @author MBD
  */
 public class CleanerException extends Exception {
 

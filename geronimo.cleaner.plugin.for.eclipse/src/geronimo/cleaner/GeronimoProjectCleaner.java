@@ -15,7 +15,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
+/**
+ * 
+ * @author MBD
+ *
+ */
 @SuppressWarnings("deprecation")
 public class GeronimoProjectCleaner {
 
@@ -34,13 +38,13 @@ public class GeronimoProjectCleaner {
 
 	private static final String GERONIMO_CONF_ATTRIBUTES_TAG = "attributes";
 
-	public static boolean clearRepositoryDir(String geronimoLocation) {
-		File repository = new File(geronimoLocation + GERONIMO_APP_DIR + "\\"
+	public static boolean clearRepositoryDir(String geronimoLocation) throws CleanerException {
+		File repository = new File(geronimoLocation + "\\" + GERONIMO_APP_DIR + "\\"
 				+ GERONIMO_WEB_APP_DIR);
 		return deleteDirectory(repository);
 	}
 
-	private static boolean deleteDirectory(File path) {
+	private static boolean deleteDirectory(File path) throws CleanerException {
 		if (path.exists()) {
 			File[] files = path.listFiles();
 			for (int i = 0; i < files.length; i++) {
@@ -50,6 +54,8 @@ public class GeronimoProjectCleaner {
 					files[i].delete();
 				}
 			}
+		} else {
+			throw new CleanerException("File does not exists: " + path.getAbsolutePath());
 		}
 		return (path.delete());
 	}
@@ -96,6 +102,8 @@ public class GeronimoProjectCleaner {
 			} catch (IOException e) {
 				throw new CleanerException(e);
 			}
+		} else {
+			throw new CleanerException("File does not exists: " + config.getAbsolutePath());
 		}
 
 		if (smthFound) {
