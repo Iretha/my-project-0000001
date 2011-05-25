@@ -44,14 +44,14 @@ public class GeneratorHandler extends AbstractHandler {
 					try {
 						generateBundleFiles(destinationDirectory, sourceFilePath.toOSString());
 						openInformation(getActiveShell(event), "Information",
-								"All Done! Please, refresh destination directory to view generated files.");
+								"All Done! Please refresh destination directory to view generated files!");
 					} catch (GeneratorException e) {
 						openError(getActiveShell(event), "Runtime Exception", e.getMessage());
 					}
 				}
 			} else {
 				openInformation(getActiveShell(event), "Information",
-						"Please, select a \"txt\" source file!");
+						"Please select a \"txt\" source file!");
 			}
 		}
 		return null;
