@@ -22,6 +22,10 @@ public class BundleGenerator {
 
 	public static final String FILE_EXTENSION_SEPARATOR = ".";
 
+	public static final String LOCALE_SEPARATOR = "_";
+
+	public static final String FOLDER_SEPARATOR = "\\";
+
 	private static final String PROP_FILE_COMMENT_CHAR = "#";
 
 	private static final String EMPTY = "";
@@ -50,18 +54,18 @@ public class BundleGenerator {
 					}
 					if (separator == '|') {
 						throw new GeneratorException(
-								"\"|\" is reserved! Please choose another character.");
+								"\"|\" is reserved! Please choose another character!");
 					}
 					subs = line.split(new String(new char[] { separator }));
 					if (subs.length < 3) {
 						throw new GeneratorException(
-								"Source file is invalid! First line should conatin following information: #(the separator itself)WebMessages(output file name)#properties(output file extension)#en(locale1)#bg(locale2)#nn(localeN)");
+								"Source file is not valid! First line should contain following information: #(the separator itself)WebMessages(output file name)#properties(output file extension)#en(locale1)#bg(locale2)#nn(localeN)");
 					}
 					targetFileName = subs[1];
-					targetFileExtension = "." + subs[2];
+					targetFileExtension = FILE_EXTENSION_SEPARATOR + subs[2];
 					locales = new String[subs.length - 3];
 					for (int i = 3; i < subs.length; i++) {
-						locales[i - 3] = "_" + subs[i];
+						locales[i - 3] = LOCALE_SEPARATOR + subs[i];
 					}
 					contents = new StringBuilder[locales.length];
 				} else {
@@ -71,8 +75,8 @@ public class BundleGenerator {
 
 			for (int x = 0; x < locales.length; x++) {
 				if (contents[x].length() > 0) {
-					writeFile(contents[x], destinationDir + "\\" + targetFileName + locales[x]
-							+ targetFileExtension);
+					writeFile(contents[x], destinationDir + FOLDER_SEPARATOR + targetFileName
+							+ locales[x] + targetFileExtension);
 				}
 			}
 
@@ -145,7 +149,6 @@ public class BundleGenerator {
 			output = new BufferedWriter(new FileWriter(new File(fileName)));
 			output.write(builder.toString());
 			output.flush();
-			System.out.println("File " + fileName + " generated!");
 		} catch (IOException e) {
 			throw new GeneratorException("I/O Probelm with: " + fileName);
 		} finally {
