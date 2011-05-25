@@ -24,6 +24,8 @@ public class BundleGenerator {
 
 	private static final String PROP_FILE_COMMENT_CHAR = "#";
 
+	private static final String EMPTY = "";
+
 	public static void generateBundleFiles(String destinationDir, String sourceFilePath)
 			throws GeneratorException {
 		BufferedReader reader = null;
@@ -93,7 +95,11 @@ public class BundleGenerator {
 			String line, int cnt) throws GeneratorException {
 		String[] subs;
 
-		if (line.startsWith(PROP_FILE_COMMENT_CHAR)) {
+		if (line == null || (line != null && line.trim().equals(EMPTY))) {
+			for (int x = 0; x < locales.length; x++) {
+				contents[x] = appendLine(contents[x], EMPTY);
+			}
+		} else if (line.startsWith(PROP_FILE_COMMENT_CHAR)) {
 			for (int x = 0; x < locales.length; x++) {
 				contents[x] = appendLine(contents[x], line);
 			}

@@ -46,15 +46,14 @@ public class GeneratorHandler extends AbstractHandler {
 							.open();
 				}
 				if (destinationDirectory != null && destinationDirectory.length() > 0) {
-					System.out.println(destinationDirectory);
 					try {
 						BundleGenerator.generateBundleFiles(destinationDirectory, firstElement
 								.getLocation().toOSString());
 						MessageDialog.openInformation(HandlerUtil.getActiveShell(event),
 								"Information", "Done!");
 					} catch (GeneratorException e) {
-						MessageDialog.openError(HandlerUtil.getActiveShell(event), "Runtime Exception",
-								e.getMessage());
+						MessageDialog.openError(HandlerUtil.getActiveShell(event),
+								"Runtime Exception", e.getMessage());
 					}
 				}
 
