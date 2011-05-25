@@ -6,11 +6,12 @@ package bundle.generator.plugin.generator;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Writer;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 /**
  * @author MBD
@@ -24,15 +25,15 @@ public class BundleGenerator {
 
 	public static final String LOCALE_SEPARATOR = "_";
 
-	public static final String FOLDER_SEPARATOR = "\\";
-
 	private static final String PROP_FILE_COMMENT_CHAR = "#";
 
-	private static final String EMPTY = "";
+	private static final String FILE_ENCODING = "UTF-8";
 
 	public static void generateBundleFiles(String destinationDir, String sourceFilePath)
 			throws GeneratorException {
 		BufferedReader reader = null;
+		InputStreamReader inputStream = null;
+		FileInputStream fileInput = null;
 		try {
 			char separator = 0;
 			int cnt = 0;
@@ -42,8 +43,9 @@ public class BundleGenerator {
 			StringBuilder[] contents = null;
 			String line = null;
 			String[] subs = null;
-			File sourceFile = new File(sourceFilePath);
-			reader = new BufferedReader(new FileReader(sourceFile));
+			fileInput = new FileInputStream(new File(sourceFilePath));
+			inputStream = new InputStreamReader(fileInput, FILE_ENCODING);
+			reader = new BufferedReader(inputStream);
 			while ((line = reader.readLine()) != null) {
 				cnt++;
 				if (cnt == 1) {
@@ -75,7 +77,7 @@ public class BundleGenerator {
 
 			for (int x = 0; x < locales.length; x++) {
 				if (contents[x].length() > 0) {
-					writeFile(contents[x], destinationDir + FOLDER_SEPARATOR + targetFileName
+					writeFile(contents[x], destinationDir + File.separatorChar + targetFileName
 							+ locales[x] + targetFileExtension);
 				}
 			}
@@ -85,51 +87,49 @@ public class BundleGenerator {
 		} catch (IOException e) {
 			throw new GeneratorException("I/O Problem with: " + destinationDir);
 		} finally {
-			if (reader != null) {
-				try {
+			try {
+				if (reader != null) {
 					reader.close();
-				} catch (IOException e) {
-					throw new GeneratorException("I/O Problem with the file reader.");
 				}
+				if (inputStream != null) {
+					inputStream.close();
+				}
+				if (fileInput != null) {
+					fileInput.close();
+				}
+			} catch (IOException e) {
+				throw new GeneratorException("I/O Problem with the file reader.");
 			}
 		}
 	}
 
 	private static void writeLine(char separator, String[] locales, StringBuilder[] contents,
 			String line, int cnt) throws GeneratorException {
-		String[] subs;
-
-		if (line == null || (line != null && line.trim().equals(EMPTY))) {
-			for (int x = 0; x < locales.length; x++) {
-				contents[x] = appendLine(contents[x], EMPTY);
-			}
-		} else if (line.startsWith(PROP_FILE_COMMENT_CHAR)) {
-			for (int x = 0; x < locales.length; x++) {
-				contents[x] = appendLine(contents[x], line);
-			}
-		} else {
-			if (line.indexOf(separator) > 0) {
-				subs = line.split(new String(new char[] { separator }));
-				int wordCount = locales.length + 1;
-				if (subs.length != wordCount) {
-					throw new GeneratorException(
-							"Error on the line: "
-									+ cnt
-									+ ". The Line should contain exact "
-									+ wordCount
-									+ " words, separated by \""
-									+ separator
-									+ "\". First one is the keyword, followed by translation for each locale in appropriate order, determinated on the first line.");
-				} else {
-					for (int x = 0; x < locales.length; x++) {
-						if (locales[x].equalsIgnoreCase("_bg")) {
-							contents[x] = appendLine(contents[x], subs[0] + "="
-									+ convertToHexString(subs[x + 1]));
-						} else {
-							contents[x] = appendLine(contents[x], subs[0] + "=" + subs[x + 1]);
-						}
+		if (line != null && !line.startsWith(PROP_FILE_COMMENT_CHAR) && line.indexOf(separator) > 0) {
+			String[] subs = line.split(new String(new char[] { separator }));
+			int wordCount = locales.length + 1;
+			if (subs.length != wordCount) {
+				throw new GeneratorException(
+						"Error on the line: "
+								+ cnt
+								+ ". The Line should contain exact "
+								+ wordCount
+								+ " words, separated by \""
+								+ separator
+								+ "\". First one is the keyword, followed by translation for each locale in appropriate order, determinated on the first line.");
+			} else {
+				for (int x = 0; x < locales.length; x++) {
+					if (locales[x].equalsIgnoreCase("_bg")) {
+						contents[x] = appendLine(contents[x], subs[0] + "="
+								+ convertToHexString(subs[x + 1]));
+					} else {
+						contents[x] = appendLine(contents[x], subs[0] + "=" + subs[x + 1]);
 					}
 				}
+			}
+		} else {
+			for (int x = 0; x < locales.length; x++) {
+				contents[x] = appendLine(contents[x], line);
 			}
 		}
 	}
@@ -138,15 +138,23 @@ public class BundleGenerator {
 		if (builder == null) {
 			builder = new StringBuilder();
 		}
-		builder.append(line);
+		if (line == null) {
+			builder.append("");
+		} else {
+			builder.append(line.trim());
+		}
 		builder.append(System.getProperty("line.separator"));
 		return builder;
 	}
 
 	private static void writeFile(StringBuilder builder, String fileName) throws GeneratorException {
-		Writer output = null;
+		BufferedWriter output = null;
+		OutputStreamWriter outStream = null;
+		FileOutputStream fileOutStream = null;
 		try {
-			output = new BufferedWriter(new FileWriter(new File(fileName)));
+			fileOutStream = new FileOutputStream(new File(fileName));
+			outStream = new OutputStreamWriter(fileOutStream, FILE_ENCODING);
+			output = new BufferedWriter(outStream);
 			output.write(builder.toString());
 			output.flush();
 		} catch (IOException e) {
@@ -155,6 +163,12 @@ public class BundleGenerator {
 			try {
 				if (output != null) {
 					output.close();
+				}
+				if (outStream != null) {
+					outStream.close();
+				}
+				if (fileOutStream != null) {
+					fileOutStream.close();
 				}
 			} catch (IOException e) {
 				throw new GeneratorException("I/O Problems with our writer! :D");
@@ -170,7 +184,7 @@ public class BundleGenerator {
 	private static String convertToHexString(String unicodeString) {
 		String ap = "\\u0";
 		char[] chars = unicodeString.toCharArray();
-		StringBuffer output = new StringBuffer();
+		StringBuilder output = new StringBuilder();
 		for (char c : chars) {
 			int charToInt = (int) c;
 			if (Character.isLetter(c)) {
@@ -184,7 +198,6 @@ public class BundleGenerator {
 				output.append(c);
 			}
 		}
-		System.out.println(unicodeString + "->" + output.toString());
 		return output.toString();
 	}
 }
