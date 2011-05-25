@@ -139,7 +139,7 @@ public class BundleGenerator {
 			builder = new StringBuilder();
 		}
 		if (line == null) {
-			builder.append("");
+			builder.append(PROP_FILE_COMMENT_CHAR);
 		} else {
 			builder.append(line.trim());
 		}
