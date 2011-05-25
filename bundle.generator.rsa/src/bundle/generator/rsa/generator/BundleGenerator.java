@@ -191,12 +191,8 @@ public class BundleGenerator {
 								+ "\". First one is the keyword, followed by translation for each locale in appropriate order, determinated on the first line.");
 			}
 			for (int x = 0; x < locales.length; x++) {
-				if (locales[x].equalsIgnoreCase("_bg")) {
-					contents[x] = appendLine(contents[x], subs[0] + "="
-							+ convertToHexString(subs[x + 1]));
-				} else {
-					contents[x] = appendLine(contents[x], subs[0] + "=" + subs[x + 1]);
-				}
+				contents[x] = appendLine(contents[x], subs[0] + "="
+						+ convertToHexString(subs[x + 1]));
 			}
 		} else {
 			for (int x = 0; x < locales.length; x++) {
