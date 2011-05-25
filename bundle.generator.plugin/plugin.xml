@@ -8,6 +8,7 @@
          <command
                commandId="bundle.generator.plugin.handlers.generatorhandler"
                label="Generate bundle files..."
+               icon="icons/icon.png"
                style="push">
          </command>
       </menuContribution>
