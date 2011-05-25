@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer">
+         <command
+               commandId="bundle.generator.rsa.handlers.generatorhandler"
+               label="Generate bundle files..."
+               icon="icons/icon.png"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="bundle.generator.rsa.handlers.GeneratorHandler"
+            id="bundle.generator.rsa.handlers.generatorhandler"
+            name="Bundle Generator">
+      </command>
+   </extension>
+</plugin>
