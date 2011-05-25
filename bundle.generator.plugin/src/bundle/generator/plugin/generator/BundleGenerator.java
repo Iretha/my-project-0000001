@@ -129,7 +129,7 @@ public class BundleGenerator {
 			}
 		} else {
 			for (int x = 0; x < locales.length; x++) {
-				contents[x] = appendLine(contents[x], line);
+				contents[x] = appendLine(contents[x], PROP_FILE_COMMENT_CHAR + line);
 			}
 		}
 	}
@@ -139,7 +139,7 @@ public class BundleGenerator {
 			builder = new StringBuilder();
 		}
 		if (line == null) {
-			builder.append(PROP_FILE_COMMENT_CHAR);
+			builder.append("");
 		} else {
 			builder.append(line.trim());
 		}
