@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import static org.eclipse.ui.handlers.HandlerUtil.*;
 
 import static bundle.generator.plugin.generator.BundleGenerator.*;
+import bundle.generator.plugin.generator.BundleGenerator;
 import bundle.generator.plugin.generator.GeneratorException;
 
 /**
@@ -31,7 +32,8 @@ public class GeneratorHandler extends AbstractHandler {
 		if (sourceFilePath.segmentCount() < 2) {
 			openError(getActiveShell(event), "Error", "File is not valid!");
 		} else {
-			if (firstElement.getFileExtension().equalsIgnoreCase("txt")) {
+			if (firstElement.getFileExtension().equalsIgnoreCase(
+					BundleGenerator.SOURCE_FILE_EXTENSION)) {
 				IPath destinationDirectoryPath = sourceFilePath.uptoSegment(sourceFilePath
 						.segmentCount() - 1);
 				String destinationDirectory = destinationDirectoryPath.toOSString();

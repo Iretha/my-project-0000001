@@ -19,11 +19,14 @@ import java.io.OutputStreamWriter;
  */
 public class BundleGenerator {
 
+	/**
+	 * Source file extension
+	 */
 	public static final String SOURCE_FILE_EXTENSION = "txt";
 
-	public static final String FILE_EXTENSION_SEPARATOR = ".";
+	private static final String FILE_EXTENSION_SEPARATOR = ".";
 
-	public static final String LOCALE_SEPARATOR = "_";
+	private static final String LOCALE_SEPARATOR = "_";
 
 	private static final String PROP_FILE_COMMENT_CHAR = "#";
 
@@ -108,7 +111,18 @@ public class BundleGenerator {
 		if (line != null && !line.startsWith(PROP_FILE_COMMENT_CHAR) && line.indexOf(separator) > 0) {
 			String[] subs = line.split(new String(new char[] { separator }));
 			int wordCount = locales.length + 1;
-			if (subs.length != wordCount) {
+			if (subs.length == 2 && subs.length != wordCount) {
+				// copy to all files
+				for (int x = 0; x < locales.length; x++) {
+					contents[x] = appendLine(contents[x], subs[0] + "="
+							+ convertToHexString(subs[1]));
+				}
+			} else if (subs.length == wordCount) {
+				for (int x = 0; x < locales.length; x++) {
+					contents[x] = appendLine(contents[x], subs[0] + "="
+							+ convertToHexString(subs[x + 1]));
+				}
+			} else {
 				throw new GeneratorException(
 						"Error on the line: "
 								+ cnt
@@ -117,12 +131,8 @@ public class BundleGenerator {
 								+ " words, separated by \""
 								+ separator
 								+ "\". First one is the keyword, followed by translation for each locale in appropriate order, determinated on the first line.");
-			} else {
-				for (int x = 0; x < locales.length; x++) {
-					contents[x] = appendLine(contents[x], subs[0] + "="
-							+ convertToHexString(subs[x + 1]));
-				}
 			}
+
 		} else {
 			for (int x = 0; x < locales.length; x++) {
 				contents[x] = appendLine(contents[x], PROP_FILE_COMMENT_CHAR + line);
