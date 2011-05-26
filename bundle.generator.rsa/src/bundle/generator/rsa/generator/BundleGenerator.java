@@ -19,6 +19,9 @@ import java.io.OutputStreamWriter;
  */
 public class BundleGenerator {
 
+	/**
+	 * Source file extension
+	 */
 	public static final String SOURCE_FILE_EXTENSION = "txt";
 
 	private static final String FILE_ENCODING = "UTF-8";
