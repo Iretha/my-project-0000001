@@ -3,18 +3,29 @@
  */
 package mbd.creational.factory.data;
 
+import mbd.creational.factory.MyFactory;
+import mbd.utils.MyExamplesExeption;
+
 /**
  * @author developer0024
  */
-public class SpecificObject2 extends SpecificObject {
+class SpecificObject2 extends SpecificObject {
 
-	// sample
+	static {
+		try {
+			MyFactory.getInstance().registerClass(SpecificObjectsEnum.SpecObj2.getKey(),
+					new SpecificObject2());
+		} catch (MyExamplesExeption e) {
+			// TODO
+		}
+	}
 
-	/**
-	 * 
-	 */
-	private SpecificObject2() {
+	public SpecificObject2() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public SpecificObject createClassInstance() {
+		return new SpecificObject2();
 	}
 }

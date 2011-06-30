@@ -18,7 +18,7 @@ public enum SpecificObjectsEnum {
 	/**
 	 * Специфичен обект 2
 	 */
-	SpecObj2("SpecificObject2", SpecificObject1.class);
+	SpecObj2("SpecificObject2", SpecificObject2.class);
 
 	Class clz = null;
 

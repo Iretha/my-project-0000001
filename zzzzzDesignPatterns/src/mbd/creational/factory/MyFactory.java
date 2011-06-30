@@ -6,6 +6,7 @@ package mbd.creational.factory;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.Map;
 
 import mbd.creational.factory.data.SpecificObject;
 import mbd.creational.factory.data.SpecificObjectsEnum;
@@ -30,37 +31,29 @@ public class MyFactory {
 
 	private static MyFactory instance = null;
 
+	private Map<String, SpecificObject> registeredClasses = null;
+
 	/**
 	 * Singleton pattern for creation.
 	 * 
 	 * @return MyFactory
+	 * @throws MyExamplesExeption
 	 */
-	public static synchronized MyFactory getInstance() {
+	public static synchronized MyFactory getInstance() throws MyExamplesExeption {
 		if (instance == null) {
 			instance = new MyFactory();
 		}
 		return instance;
 	}
 
-	private HashMap<String, Object> registeredClasses = new HashMap<String, Object>();
-
 	/**
 	 * Hidden constructor
+	 * 
+	 * @throws MyExamplesExeption
 	 */
-	private MyFactory() {
+	private MyFactory() throws MyExamplesExeption {
 		super();
-		loadAllClasses();
-	}
-
-	private void loadAllClasses() {
-		SpecificObjectsEnum[] classesList = SpecificObjectsEnum.values();
-		for (SpecificObjectsEnum curr : classesList) {
-			try {
-				registerClass(curr);
-			} catch (MyExamplesExeption e) {
-				// TODO
-			}
-		}
+		this.registeredClasses = new HashMap<String, SpecificObject>();
 	}
 
 	/**
@@ -71,12 +64,15 @@ public class MyFactory {
 	 */
 	public SpecificObject createInstanceUsingReflection(SpecificObjectsEnum specificObj)
 			throws MyExamplesExeption {
+
+		if (specificObj == null) {
+			return null;
+		}
+		
 		SpecificObject specificObjectIntance = null;
 		try {
-			Class clz = (Class) this.registeredClasses.get(specificObj.getKey());
-			Constructor objConstructor = clz.getDeclaredConstructor(new Class[] { String.class });
-			specificObjectIntance = (SpecificObject) objConstructor.newInstance(new Object[] {});
-
+			Constructor objConstructor = specificObj.getClazz().getDeclaredConstructor();
+			specificObjectIntance = (SpecificObject) objConstructor.newInstance();
 		} catch (SecurityException e) {
 			throw new MyExamplesExeption(e);
 		} catch (NoSuchMethodException e) {
@@ -93,22 +89,14 @@ public class MyFactory {
 		return specificObjectIntance;
 	}
 
-	/**
-	 * Register new classes for instantiation.
-	 * 
-	 * @param specObj
-	 * @throws MyExamplesExeption
-	 */
-	public void registerClass(SpecificObjectsEnum specObj) throws MyExamplesExeption {
-		Class curr = specObj.getClazz();
-		// try {
-		// Class.forName(curr.getSimpleName());
-		this.registeredClasses.put(specObj.getKey(), curr);
-		// } catch (ClassNotFoundException e) {
-		// throw new MyExamplesExeption(curr.getSimpleName() +
-		// " is not loaded.", e);
-		// }
-
+	public SpecificObject createInstance(SpecificObjectsEnum specificObj) {
+		if (specificObj == null) {
+			return null;
+		}
+		return this.registeredClasses.get(specificObj.getKey()).createClassInstance();
 	}
 
+	public void registerClass(String key, SpecificObject specObj) {
+		this.registeredClasses.put(key, specObj);
+	}
 }

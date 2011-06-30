@@ -11,9 +11,23 @@ import mbd.utils.ServicesManager;
 public abstract class SpecificObject {
 
 	/**
+	 * Конструктор
+	 */
+	public SpecificObject() {
+		super();
+	}
+
+	/**
 	 * Do specific business
 	 */
 	public void doSpecificStuff() {
 		ServicesManager.getInstance().getLog().info(getClass().getSimpleName());
 	}
+
+	/**
+	 * Връща инстанция на обекта
+	 * 
+	 * @return SpecificObject
+	 */
+	public abstract SpecificObject createClassInstance();
 }
