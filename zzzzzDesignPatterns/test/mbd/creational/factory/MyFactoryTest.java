@@ -60,8 +60,7 @@ public class MyFactoryTest extends BaseTestCase {
 				Class.forName(SpecificObjectsEnum.SpecObj1.getClazz().getName());
 				Class.forName(SpecificObjectsEnum.SpecObj2.getClazz().getName());
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				fail(e.getMessage());
 			}
 			assertNull(MyFactory.getInstance().createInstance(null));
 			SpecificObject o11 = MyFactory.getInstance().createInstance(
