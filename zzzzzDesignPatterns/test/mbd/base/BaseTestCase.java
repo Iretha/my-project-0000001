@@ -7,7 +7,6 @@ import junit.framework.TestCase;
 
 /**
  * @author developer0024
- * 
  */
 public class BaseTestCase extends TestCase {
 
