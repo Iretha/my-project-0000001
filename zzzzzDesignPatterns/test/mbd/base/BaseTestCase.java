@@ -6,6 +6,8 @@ package mbd.base;
 import junit.framework.TestCase;
 
 /**
+ * Базов клас за JUnit тестове
+ * 
  * @author developer0024
  */
 public class BaseTestCase extends TestCase {
