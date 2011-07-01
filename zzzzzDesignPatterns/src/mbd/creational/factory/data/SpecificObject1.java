@@ -9,7 +9,7 @@ import mbd.utils.MyExamplesExeption;
 /**
  * @author developer0024
  */
-class SpecificObject1 extends SpecificObject {
+public class SpecificObject1 extends SpecificObject {
 
 	static {
 		try {
