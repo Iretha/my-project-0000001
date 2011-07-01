@@ -17,6 +17,8 @@ import mbd.example.data.factorymethod.IBObject;
  * <li>Defines an interface for creating objects, but let subclasses to decide
  * which class to instantiate <br> <li>Refers to the newly created object
  * through a common interface <br>
+ * <b>Applicability & Examples </b><br> <li>Document Applications: Factory for
+ * each type of documents - doc, pdf and so on.
  * 
  * @author developer0024
  */
