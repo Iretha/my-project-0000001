@@ -71,8 +71,8 @@ public class MyFactory {
 		
 		ISpecificObject specificObjectIntance = null;
 		try {
-			Constructor objConstructor = specificObj.getClazz().getDeclaredConstructor();
-			specificObjectIntance = (ISpecificObject) objConstructor.newInstance();
+			Constructor<ISpecificObject> objConstructor = specificObj.getClazz().getDeclaredConstructor();
+			specificObjectIntance = objConstructor.newInstance();
 		} catch (SecurityException e) {
 			throw new MyExamplesExeption(e);
 		} catch (NoSuchMethodException e) {
