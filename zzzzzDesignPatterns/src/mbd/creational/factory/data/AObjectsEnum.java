@@ -1,36 +1,41 @@
-/**
- * 
- */
 package mbd.creational.factory.data;
 
 /**
- * Енумерация със специфични обекти
+ * Енумерация със специфични обекти за инстанциране
  * 
  * @author developer0024
  */
 public enum AObjectsEnum {
 
 	/**
-	 * Специфичен обект 1
+	 * Обект 1
 	 */
 	SpecObj1(AObjectImpl1.class.getSimpleName(), AObjectImpl1.class),
 
 	/**
-	 * Специфичен обект 2
+	 * Обект 2
 	 */
 	SpecObj2(AObjectImpl2.class.getSimpleName(), AObjectImpl2.class);
 
-	Class clz = null;
-
-	String key = null;
+	/**
+	 * Клас на обекта
+	 */
+	private Class<?> clz = null;
 
 	/**
-	 * КОнструктор
+	 * Ключ
+	 */
+	private String key = null;
+
+	/**
+	 * Конструктор
 	 * 
 	 * @param key
+	 *            - ключ
 	 * @param clz
+	 *            - клас на обекта
 	 */
-	private AObjectsEnum(String key, Class clz) {
+	private AObjectsEnum(String key, Class<?> clz) {
 		this.key = key;
 		this.clz = clz;
 	}
@@ -40,7 +45,7 @@ public enum AObjectsEnum {
 	 * 
 	 * @return Class
 	 */
-	public Class getClazz() {
+	public Class<?> getClazz() {
 		return this.clz;
 	}
 

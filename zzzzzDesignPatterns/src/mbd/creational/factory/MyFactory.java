@@ -8,9 +8,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-import mbd.creational.factory.data.IAObject;
 import mbd.creational.factory.data.AObjectsEnum;
+import mbd.creational.factory.data.IAObject;
 import mbd.utils.MyExamplesExeption;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * <b>Design Pattern Name: </b> Factory Pattern <br>
@@ -29,9 +31,10 @@ import mbd.utils.MyExamplesExeption;
  */
 public class MyFactory {
 
+	/**
+	 * Single instance
+	 */
 	private static MyFactory instance = null;
-
-	private Map<String, IAObject> registeredClasses = null;
 
 	/**
 	 * Singleton pattern for creation.
@@ -47,6 +50,11 @@ public class MyFactory {
 	}
 
 	/**
+	 * Registered classes map
+	 */
+	private Map<String, IAObject> registeredClasses = null;
+
+	/**
 	 * Hidden constructor
 	 * 
 	 * @throws MyExamplesExeption
@@ -57,9 +65,24 @@ public class MyFactory {
 	}
 
 	/**
+	 * <b>Simple Factory</b> - Creates specific object instance
 	 * 
 	 * @param specificObj
-	 * @return SpecificObject
+	 * @return IAObject
+	 */
+	public IAObject createInstance(AObjectsEnum specificObj) {
+		if (specificObj == null) {
+			return null;
+		}
+		return this.registeredClasses.get(specificObj.getKey()).createClassInstance();
+	}
+
+	/**
+	 * <b>Reflection Factory </b> - Creates specific object instance using
+	 * Reflection.
+	 * 
+	 * @param specificObj
+	 * @return IAObject
 	 * @throws MyExamplesExeption
 	 */
 	public IAObject createInstanceUsingReflection(AObjectsEnum specificObj)
@@ -68,10 +91,11 @@ public class MyFactory {
 		if (specificObj == null) {
 			return null;
 		}
-		
+
 		IAObject specificObjectIntance = null;
 		try {
-			Constructor<IAObject> objConstructor = specificObj.getClazz().getDeclaredConstructor();
+			Constructor<IAObject> objConstructor = (Constructor<IAObject>) specificObj.getClazz()
+					.getDeclaredConstructor();
 			specificObjectIntance = objConstructor.newInstance();
 		} catch (SecurityException e) {
 			throw new MyExamplesExeption(e);
@@ -89,14 +113,18 @@ public class MyFactory {
 		return specificObjectIntance;
 	}
 
-	public IAObject createInstance(AObjectsEnum specificObj) {
-		if (specificObj == null) {
-			return null;
+	/**
+	 * Register classes for instantiation
+	 * 
+	 * @param key
+	 * @param specObj
+	 * @return boolean - is successfully registered
+	 */
+	public boolean registerClass(String key, IAObject specObj) {
+		if (StringUtils.isNotEmpty(key) && specObj != null) {
+			this.registeredClasses.put(key, specObj);
+			return true;
 		}
-		return this.registeredClasses.get(specificObj.getKey()).createClassInstance();
-	}
-
-	public void registerClass(String key, IAObject specObj) {
-		this.registeredClasses.put(key, specObj);
+		return false;
 	}
 }

@@ -13,17 +13,28 @@ public class AObjectImpl2 implements IAObject {
 
 	static {
 		try {
-			MyFactory.getInstance().registerClass(AObjectsEnum.SpecObj2.getKey(),
-					new AObjectImpl2());
+			if (!MyFactory.getInstance().registerClass(AObjectsEnum.SpecObj2.getKey(),
+					new AObjectImpl2())) {
+				throw new MyExamplesExeption("Class " + AObjectsEnum.SpecObj2.getKey()
+						+ " is not registered.");
+			}
 		} catch (MyExamplesExeption e) {
-			// TODO
+			// its already logged.
 		}
 	}
 
+	/**
+	 * Constructor
+	 */
 	public AObjectImpl2() {
 		super();
 	}
 
+	/**
+	 * Creates new instance.
+	 * 
+	 * @see mbd.creational.factory.data.IAObject#createClassInstance()
+	 */
 	@Override
 	public IAObject createClassInstance() {
 		return new AObjectImpl2();
