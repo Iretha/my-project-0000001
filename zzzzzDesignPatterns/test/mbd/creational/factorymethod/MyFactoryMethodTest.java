@@ -3,8 +3,8 @@ package mbd.creational.factorymethod;
 import org.junit.Test;
 
 import mbd.base.BaseTestCase;
-import mbd.creational.factorymethod.data.BObjectImpl1;
-import mbd.creational.factorymethod.data.BObjectImpl2;
+import mbd.example.data.factorymethod.BObjectImpl1;
+import mbd.example.data.factorymethod.BObjectImpl2;
 
 /**
  * @author MBD

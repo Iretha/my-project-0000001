@@ -1,7 +1,7 @@
 /**
  * TODO
  */
-package mbd.creational.factorymethod.data;
+package mbd.example.data.factorymethod;
 
 /**
  * @author MBD

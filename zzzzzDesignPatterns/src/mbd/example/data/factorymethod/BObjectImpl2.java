@@ -1,7 +1,7 @@
 /**
  * TODO
  */
-package mbd.creational.factorymethod.data;
+package mbd.example.data.factorymethod;
 
 /**
  * @author MBD
@@ -10,7 +10,7 @@ package mbd.creational.factorymethod.data;
 public class BObjectImpl2 implements IBObject {
 
 	/**
-	 * @see mbd.creational.factorymethod.data.IBObject#getName()
+	 * @see mbd.example.data.factorymethod.IBObject#getName()
 	 */
 	@Override
 	public String getName() {

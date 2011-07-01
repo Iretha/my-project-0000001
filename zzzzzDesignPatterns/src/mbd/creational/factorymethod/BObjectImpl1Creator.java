@@ -3,8 +3,8 @@
  */
 package mbd.creational.factorymethod;
 
-import mbd.creational.factorymethod.data.BObjectImpl1;
-import mbd.creational.factorymethod.data.IBObject;
+import mbd.example.data.factorymethod.BObjectImpl1;
+import mbd.example.data.factorymethod.IBObject;
 
 
 /**
