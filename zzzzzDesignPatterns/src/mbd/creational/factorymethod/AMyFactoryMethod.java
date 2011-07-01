@@ -1,5 +1,7 @@
 package mbd.creational.factorymethod;
 
+import mbd.creational.factorymethod.data.IBObject;
+
 /**
  * <b>Design Pattern Name: </b> Factory Method Pattern <b>OR</b> Virtual
  * Constructor Pattern<br>
@@ -18,6 +20,12 @@ package mbd.creational.factorymethod;
  * 
  * @author developer0024
  */
-public class MyFactoryMethod {
-	// TODO
+public abstract class AMyFactoryMethod {
+
+	public String anOperation() {
+		IBObject obj = factoryMethod();
+		return obj.getName();
+	}
+
+	protected abstract IBObject factoryMethod();
 }
