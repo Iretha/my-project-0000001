@@ -8,17 +8,17 @@ package mbd.creational.factory.data;
  * 
  * @author developer0024
  */
-public enum SpecificObjectsEnum {
+public enum AObjectsEnum {
 
 	/**
 	 * Специфичен обект 1
 	 */
-	SpecObj1("SpecificObject1", SpecificObject1.class),
+	SpecObj1(AObjectImpl1.class.getSimpleName(), AObjectImpl1.class),
 
 	/**
 	 * Специфичен обект 2
 	 */
-	SpecObj2("SpecificObject2", SpecificObject2.class);
+	SpecObj2(AObjectImpl2.class.getSimpleName(), AObjectImpl2.class);
 
 	Class clz = null;
 
@@ -30,7 +30,7 @@ public enum SpecificObjectsEnum {
 	 * @param key
 	 * @param clz
 	 */
-	private SpecificObjectsEnum(String key, Class clz) {
+	private AObjectsEnum(String key, Class clz) {
 		this.key = key;
 		this.clz = clz;
 	}

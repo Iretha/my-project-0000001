@@ -9,23 +9,23 @@ import mbd.utils.MyExamplesExeption;
 /**
  * @author developer0024
  */
-public class SpecificObject2 implements ISpecificObject {
+public class AObjectImpl2 implements IAObject {
 
 	static {
 		try {
-			MyFactory.getInstance().registerClass(SpecificObjectsEnum.SpecObj2.getKey(),
-					new SpecificObject2());
+			MyFactory.getInstance().registerClass(AObjectsEnum.SpecObj2.getKey(),
+					new AObjectImpl2());
 		} catch (MyExamplesExeption e) {
 			// TODO
 		}
 	}
 
-	public SpecificObject2() {
+	public AObjectImpl2() {
 		super();
 	}
 
 	@Override
-	public ISpecificObject createClassInstance() {
-		return new SpecificObject2();
+	public IAObject createClassInstance() {
+		return new AObjectImpl2();
 	}
 }

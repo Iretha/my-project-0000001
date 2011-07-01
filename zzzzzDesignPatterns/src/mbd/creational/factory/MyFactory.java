@@ -8,8 +8,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-import mbd.creational.factory.data.ISpecificObject;
-import mbd.creational.factory.data.SpecificObjectsEnum;
+import mbd.creational.factory.data.IAObject;
+import mbd.creational.factory.data.AObjectsEnum;
 import mbd.utils.MyExamplesExeption;
 
 /**
@@ -31,7 +31,7 @@ public class MyFactory {
 
 	private static MyFactory instance = null;
 
-	private Map<String, ISpecificObject> registeredClasses = null;
+	private Map<String, IAObject> registeredClasses = null;
 
 	/**
 	 * Singleton pattern for creation.
@@ -53,7 +53,7 @@ public class MyFactory {
 	 */
 	private MyFactory() throws MyExamplesExeption {
 		super();
-		this.registeredClasses = new HashMap<String, ISpecificObject>();
+		this.registeredClasses = new HashMap<String, IAObject>();
 	}
 
 	/**
@@ -62,16 +62,16 @@ public class MyFactory {
 	 * @return SpecificObject
 	 * @throws MyExamplesExeption
 	 */
-	public ISpecificObject createInstanceUsingReflection(SpecificObjectsEnum specificObj)
+	public IAObject createInstanceUsingReflection(AObjectsEnum specificObj)
 			throws MyExamplesExeption {
 
 		if (specificObj == null) {
 			return null;
 		}
 		
-		ISpecificObject specificObjectIntance = null;
+		IAObject specificObjectIntance = null;
 		try {
-			Constructor<ISpecificObject> objConstructor = specificObj.getClazz().getDeclaredConstructor();
+			Constructor<IAObject> objConstructor = specificObj.getClazz().getDeclaredConstructor();
 			specificObjectIntance = objConstructor.newInstance();
 		} catch (SecurityException e) {
 			throw new MyExamplesExeption(e);
@@ -89,14 +89,14 @@ public class MyFactory {
 		return specificObjectIntance;
 	}
 
-	public ISpecificObject createInstance(SpecificObjectsEnum specificObj) {
+	public IAObject createInstance(AObjectsEnum specificObj) {
 		if (specificObj == null) {
 			return null;
 		}
 		return this.registeredClasses.get(specificObj.getKey()).createClassInstance();
 	}
 
-	public void registerClass(String key, ISpecificObject specObj) {
+	public void registerClass(String key, IAObject specObj) {
 		this.registeredClasses.put(key, specObj);
 	}
 }
