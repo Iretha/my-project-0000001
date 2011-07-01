@@ -1,6 +1,3 @@
-/**
- * TODO
- */
 package mbd.creational.factory.data;
 
 
