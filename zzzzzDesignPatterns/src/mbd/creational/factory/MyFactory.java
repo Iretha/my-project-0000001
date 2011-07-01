@@ -8,7 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-import mbd.creational.factory.data.SpecificObject;
+import mbd.creational.factory.data.ISpecificObject;
 import mbd.creational.factory.data.SpecificObjectsEnum;
 import mbd.utils.MyExamplesExeption;
 
@@ -31,7 +31,7 @@ public class MyFactory {
 
 	private static MyFactory instance = null;
 
-	private Map<String, SpecificObject> registeredClasses = null;
+	private Map<String, ISpecificObject> registeredClasses = null;
 
 	/**
 	 * Singleton pattern for creation.
@@ -53,7 +53,7 @@ public class MyFactory {
 	 */
 	private MyFactory() throws MyExamplesExeption {
 		super();
-		this.registeredClasses = new HashMap<String, SpecificObject>();
+		this.registeredClasses = new HashMap<String, ISpecificObject>();
 	}
 
 	/**
@@ -62,17 +62,17 @@ public class MyFactory {
 	 * @return SpecificObject
 	 * @throws MyExamplesExeption
 	 */
-	public SpecificObject createInstanceUsingReflection(SpecificObjectsEnum specificObj)
+	public ISpecificObject createInstanceUsingReflection(SpecificObjectsEnum specificObj)
 			throws MyExamplesExeption {
 
 		if (specificObj == null) {
 			return null;
 		}
 		
-		SpecificObject specificObjectIntance = null;
+		ISpecificObject specificObjectIntance = null;
 		try {
 			Constructor objConstructor = specificObj.getClazz().getDeclaredConstructor();
-			specificObjectIntance = (SpecificObject) objConstructor.newInstance();
+			specificObjectIntance = (ISpecificObject) objConstructor.newInstance();
 		} catch (SecurityException e) {
 			throw new MyExamplesExeption(e);
 		} catch (NoSuchMethodException e) {
@@ -89,14 +89,14 @@ public class MyFactory {
 		return specificObjectIntance;
 	}
 
-	public SpecificObject createInstance(SpecificObjectsEnum specificObj) {
+	public ISpecificObject createInstance(SpecificObjectsEnum specificObj) {
 		if (specificObj == null) {
 			return null;
 		}
 		return this.registeredClasses.get(specificObj.getKey()).createClassInstance();
 	}
 
-	public void registerClass(String key, SpecificObject specObj) {
+	public void registerClass(String key, ISpecificObject specObj) {
 		this.registeredClasses.put(key, specObj);
 	}
 }

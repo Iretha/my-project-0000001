@@ -9,7 +9,7 @@ import mbd.utils.MyExamplesExeption;
 /**
  * @author developer0024
  */
-public class SpecificObject2 extends SpecificObject {
+public class SpecificObject2 implements ISpecificObject {
 
 	static {
 		try {
@@ -25,7 +25,7 @@ public class SpecificObject2 extends SpecificObject {
 	}
 
 	@Override
-	public SpecificObject createClassInstance() {
+	public ISpecificObject createClassInstance() {
 		return new SpecificObject2();
 	}
 }

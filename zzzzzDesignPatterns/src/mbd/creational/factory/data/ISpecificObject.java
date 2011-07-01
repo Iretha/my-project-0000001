@@ -1,17 +1,18 @@
 /**
- * 
+ * TODO
  */
 package mbd.creational.factory.data;
 
-/**
- * @author developer0024
- */
-public abstract class SpecificObject {
 
+/**
+ * @author MBD
+ *
+ */
+public interface ISpecificObject {
 	/**
 	 * Връща инстанция на обекта
 	 * 
 	 * @return SpecificObject
 	 */
-	public abstract SpecificObject createClassInstance();
+	public abstract ISpecificObject createClassInstance();
 }
