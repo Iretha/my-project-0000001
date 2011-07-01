@@ -1,7 +1,7 @@
 /**
  * 
  */
-package mbd.creational.factory.data;
+package mbd.example.data.factory;
 
 import mbd.creational.factory.MyFactory;
 import mbd.utils.MyExamplesExeption;
@@ -33,7 +33,7 @@ public class AObjectImpl2 implements IAObject {
 	/**
 	 * Creates new instance.
 	 * 
-	 * @see mbd.creational.factory.data.IAObject#createClassInstance()
+	 * @see mbd.example.data.factory.IAObject#createClassInstance()
 	 */
 	@Override
 	public IAObject createClassInstance() {

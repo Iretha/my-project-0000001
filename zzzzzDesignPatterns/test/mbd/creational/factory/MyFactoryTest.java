@@ -1,8 +1,8 @@
 package mbd.creational.factory;
 
 import mbd.base.BaseTestCase;
-import mbd.creational.factory.data.AObjectsEnum;
-import mbd.creational.factory.data.IAObject;
+import mbd.example.data.factory.AObjectsEnum;
+import mbd.example.data.factory.IAObject;
 import mbd.utils.MyExamplesExeption;
 
 import org.junit.Test;

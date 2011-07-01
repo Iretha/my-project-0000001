@@ -1,4 +1,4 @@
-package mbd.creational.factory.data;
+package mbd.example.data.factory;
 
 /**
  * Енумерация със специфични обекти за инстанциране

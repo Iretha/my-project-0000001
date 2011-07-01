@@ -8,8 +8,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-import mbd.creational.factory.data.AObjectsEnum;
-import mbd.creational.factory.data.IAObject;
+import mbd.example.data.factory.AObjectsEnum;
+import mbd.example.data.factory.IAObject;
 import mbd.utils.MyExamplesExeption;
 
 import org.apache.commons.lang.StringUtils;
