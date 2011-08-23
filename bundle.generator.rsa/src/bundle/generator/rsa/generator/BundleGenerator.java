@@ -1,6 +1,3 @@
-/**
- * TODO
- */
 package bundle.generator.rsa.generator;
 
 import java.io.BufferedReader;
@@ -15,7 +12,6 @@ import java.io.OutputStreamWriter;
 
 /**
  * @author MBD
- * 
  */
 public class BundleGenerator {
 
@@ -144,9 +140,9 @@ public class BundleGenerator {
 		if (addedKeys == null) {
 			addedKeys = new StringBuilder();
 		}
-		addedKeys.append("/** " + comment + "*/");
+		addedKeys.append("\t" + "/** " + comment + "*/");
 		addedKeys.append(System.getProperty("line.separator"));
-		addedKeys.append(key + "(\"" + key + "\"),");
+		addedKeys.append("\t" + key + "(\"" + key + "\"),");
 		addedKeys.append(System.getProperty("line.separator"));
 		addedKeys.append(System.getProperty("line.separator"));
 		return addedKeys;
@@ -195,8 +191,6 @@ public class BundleGenerator {
 		File f = new File(enumPath);
 		if (f.exists()) {
 			try {
-				String begin = "implements IMessageKey {";
-				String end = "private String";
 
 				FileInputStream fileInput = new FileInputStream(f);
 				InputStreamReader inputStream = new InputStreamReader(fileInput, FILE_ENCODING);
@@ -217,9 +211,9 @@ public class BundleGenerator {
 				cnt.append(header);
 				cnt.append(System.getProperty("line.separator"));
 				cnt.append(content);
-				cnt.append(";");
+				cnt.append("\t" + ";");
 				cnt.append(System.getProperty("line.separator"));
-				cnt.append(footer);
+				cnt.append("\t" + footer);
 
 				writeFile(cnt, enumPath);
 
