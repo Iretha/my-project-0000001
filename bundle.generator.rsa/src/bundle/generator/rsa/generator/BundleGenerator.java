@@ -131,11 +131,11 @@ public class BundleGenerator {
 
 			String srcFolderName = File.separator + "src" + File.separator;
 			String prjFolderName = currDir.substring(0, currDir.indexOf(srcFolderName));
-			String wsFolderName = prjFolderName.substring(0,
-					prjFolderName.lastIndexOf(File.separator));
+			// String wsFolderName = prjFolderName.substring(0,
+			// prjFolderName.lastIndexOf(File.separator));
 
 			throw new GeneratorException(currDir + ":" + srcFolderName + ":" + prjFolderName + ":"
-					+ wsFolderName + enumFilePath);
+					+ ":" + enumFilePath);
 			// return wsFolderName + enumFilePath;
 
 		}
