@@ -54,6 +54,8 @@ public class BundleGenerator {
 			fileInput = new FileInputStream(new File(sourceFilePath));
 			inputStream = new InputStreamReader(fileInput, FILE_ENCODING);
 			reader = new BufferedReader(inputStream);
+			StringBuilder keys = null;
+			String enumFilePath = null;
 			while ((line = reader.readLine()) != null) {
 				cnt++;
 				if (cnt == 1) {
@@ -67,27 +69,34 @@ public class BundleGenerator {
 								"\"|\" is reserved! Please choose another character!");
 					}
 					subs = line.split(new String(new char[] { separator }));
-					if (subs.length < 3) {
+					if (subs.length < 5) {
 						throw new GeneratorException(
 								"Source file is not valid! First line should contain following information: #(the separator itself)WebMessages(output file name)#properties(output file extension)#en(locale1)#bg(locale2)#nn(localeN)");
 					}
 					targetFileName = subs[1];
 					targetFileExtension = FILE_EXTENSION_SEPARATOR + subs[2];
-					locales = new String[subs.length - 3];
-					for (int i = 3; i < subs.length; i++) {
-						locales[i - 3] = LOCALE_SEPARATOR + subs[i];
+					enumFilePath = subs[3];
+					locales = new String[subs.length - 4];
+					for (int i = 4; i < subs.length; i++) {
+						locales[i - 4] = LOCALE_SEPARATOR + subs[i];
 					}
 					contents = new StringBuilder[locales.length];
 				} else {
-					writeLine(separator, locales, contents, line, cnt);
+					keys = writeLine(keys, separator, locales, contents, line, cnt);
 				}
 			}
 
-			for (int x = 0; x < locales.length; x++) {
-				if (contents[x].length() > 0) {
-					writeFile(contents[x], destinationDir + File.separatorChar + targetFileName
-							+ locales[x] + targetFileExtension);
+			if (locales != null && contents != null) {
+				for (int x = 0; x < locales.length; x++) {
+					if (contents[x].length() > 0) {
+						writeFile(contents[x], destinationDir + File.separatorChar + targetFileName
+								+ locales[x] + targetFileExtension);
+					}
 				}
+			}
+
+			if (keys != null) {
+				writeEnumContent(getEnumFullFilePath(destinationDir, enumFilePath), keys);
 			}
 
 		} catch (FileNotFoundException e) {
@@ -109,6 +118,41 @@ public class BundleGenerator {
 				throw new GeneratorException("I/O Problem with the file reader.");
 			}
 		}
+	}
+
+	private static String getEnumFullFilePath(String currDir, String enumFilePath)
+			throws GeneratorException {
+
+		if (enumFilePath != null) {
+
+			if (enumFilePath.indexOf("/") > -1) {
+				enumFilePath = enumFilePath.replaceAll("/", File.separator);
+			}
+
+			String srcFolderName = File.separator + "src" + File.separator;
+			String prjFolderName = currDir.substring(0, currDir.indexOf(srcFolderName));
+			String wsFolderName = prjFolderName.substring(0,
+					prjFolderName.lastIndexOf(File.separator));
+
+			throw new GeneratorException(currDir + ":" + srcFolderName + ":" + prjFolderName + ":"
+					+ wsFolderName + enumFilePath);
+			// return wsFolderName + enumFilePath;
+
+		}
+		throw new GeneratorException("Missing enum file path!");
+
+	}
+
+	private static StringBuilder addKeyToEnum(StringBuilder addedKeys, String key, String comment) {
+		if (addedKeys == null) {
+			addedKeys = new StringBuilder();
+		}
+		addedKeys.append("/** " + comment + "*/");
+		addedKeys.append(System.getProperty("line.separator"));
+		addedKeys.append(key + "(\"" + key + "\"),");
+		addedKeys.append(System.getProperty("line.separator"));
+		addedKeys.append(System.getProperty("line.separator"));
+		return addedKeys;
 	}
 
 	private static StringBuilder appendLine(StringBuilder builder, String line) {
@@ -149,6 +193,46 @@ public class BundleGenerator {
 		return output.toString();
 	}
 
+	private static void writeEnumContent(String enumPath, StringBuilder content)
+			throws GeneratorException {
+		File f = new File(enumPath);
+		if (f.exists()) {
+			try {
+				String begin = "implements IMessageKey {";
+				String end = "private String";
+
+				FileInputStream fileInput = new FileInputStream(f);
+				InputStreamReader inputStream = new InputStreamReader(fileInput, FILE_ENCODING);
+				BufferedReader reader = new BufferedReader(inputStream);
+				String line = null;
+				StringBuilder target = new StringBuilder();
+				while ((line = reader.readLine()) != null) {
+					target.append(line);
+					target.append(System.getProperty("line.separator"));
+				}
+
+				String header = target.substring(0,
+						target.lastIndexOf("implements IMessageKey {") + 24);
+
+				String footer = target.substring(target.indexOf("private String"), target.length());
+
+				StringBuilder cnt = new StringBuilder();
+				cnt.append(header);
+				cnt.append(System.getProperty("line.separator"));
+				cnt.append(content);
+				cnt.append(";");
+				cnt.append(System.getProperty("line.separator"));
+				cnt.append(footer);
+
+				writeFile(cnt, enumPath);
+
+			} catch (Exception e) {
+				throw new GeneratorException("Exception while generating keys enum file "
+						+ enumPath + " " + e.getMessage());
+			}
+		}
+	}
+
 	private static void writeFile(StringBuilder builder, String fileName) throws GeneratorException {
 		BufferedWriter output = null;
 		OutputStreamWriter outStream = null;
@@ -178,8 +262,9 @@ public class BundleGenerator {
 		}
 	}
 
-	private static void writeLine(char separator, String[] locales, StringBuilder[] contents,
-			String line, int cnt) throws GeneratorException {
+	private static StringBuilder writeLine(StringBuilder addedKeys, char separator,
+			String[] locales, StringBuilder[] contents, String line, int cnt)
+			throws GeneratorException {
 		if (line != null && !line.startsWith(PROP_FILE_COMMENT_CHAR) && line.indexOf(separator) > 0) {
 			String[] subs = line.split(new String(new char[] { separator }));
 			int wordCount = locales.length + 1;
@@ -188,11 +273,17 @@ public class BundleGenerator {
 				for (int x = 0; x < locales.length; x++) {
 					contents[x] = appendLine(contents[x], subs[0] + "="
 							+ convertToHexString(subs[1]));
+					if (x == 0) {
+						addedKeys = addKeyToEnum(addedKeys, subs[0], subs[1]);
+					}
 				}
 			} else if (subs.length == wordCount) {
 				for (int x = 0; x < locales.length; x++) {
 					contents[x] = appendLine(contents[x], subs[0] + "="
 							+ convertToHexString(subs[x + 1]));
+					if (x == 0) {
+						addedKeys = addKeyToEnum(addedKeys, subs[0], subs[1]);
+					}
 				}
 			} else {
 				throw new GeneratorException(
@@ -210,5 +301,6 @@ public class BundleGenerator {
 				contents[x] = appendLine(contents[x], PROP_FILE_COMMENT_CHAR + line);
 			}
 		}
+		return addedKeys;
 	}
 }

@@ -1,11 +1,7 @@
-/**
- * TODO
- */
 package bundle.generator.rsa.generator;
 
 /**
  * @author MBD
- * 
  */
 public class GeneratorException extends Exception {
 

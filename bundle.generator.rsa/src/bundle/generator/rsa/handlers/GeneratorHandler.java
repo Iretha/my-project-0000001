@@ -1,6 +1,3 @@
-/**
- * TODO
- */
 package bundle.generator.rsa.handlers;
 
 import static bundle.generator.rsa.generator.BundleGenerator.SOURCE_FILE_EXTENSION;
@@ -18,6 +15,7 @@ import org.eclipse.core.internal.resources.File;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.DirectoryDialog;
+import org.eclipse.swt.widgets.FileDialog;
 
 import bundle.generator.rsa.generator.GeneratorException;
 
@@ -42,15 +40,17 @@ public class GeneratorHandler extends AbstractHandler {
 			if (firstElement.getFileExtension().equalsIgnoreCase(SOURCE_FILE_EXTENSION)) {
 				IPath destinationDirectoryPath = sourceFilePath.uptoSegment(sourceFilePath
 						.segmentCount() - 1);
-				String destinationDirectory = destinationDirectoryPath.toOSString();
-				boolean useCurrentDestination = openQuestion(getActiveShell(event), "Question",
-						"Use current output directory? " + destinationDirectory);
-				if (!useCurrentDestination) {
-					destinationDirectory = new DirectoryDialog(getActiveShell(event)).open();
+				String bundleDestDir = destinationDirectoryPath.toOSString();
+
+				boolean useCurrentForBundleDestDir = askUser(event, "Question",
+						"Use current output directory for bundle file? " + bundleDestDir);
+				if (!useCurrentForBundleDestDir) {
+					bundleDestDir = new DirectoryDialog(getActiveShell(event)).open();
 				}
-				if (destinationDirectory != null && destinationDirectory.length() > 0) {
+
+				if (bundleDestDir != null && bundleDestDir.length() > 0) {
 					try {
-						generateBundleFiles(destinationDirectory, sourceFilePath.toOSString());
+						generateBundleFiles(bundleDestDir, sourceFilePath.toOSString());
 						openInformation(getActiveShell(event), "Information",
 								"All Done! Please refresh destination directory to view generated files!");
 					} catch (GeneratorException e) {
@@ -64,4 +64,9 @@ public class GeneratorHandler extends AbstractHandler {
 		}
 		return null;
 	}
+
+	private boolean askUser(ExecutionEvent event, String title, String question) {
+		return openQuestion(getActiveShell(event), title, question);
+	}
+
 }
