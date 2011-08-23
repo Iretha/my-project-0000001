@@ -126,21 +126,18 @@ public class BundleGenerator {
 		if (enumFilePath != null) {
 
 			if (enumFilePath.indexOf("/") > -1) {
-				enumFilePath = enumFilePath.replaceAll("/", File.separator);
+				enumFilePath = enumFilePath.replace("/", "\\");
+			}
+			if (currDir.indexOf("/") > -1) {
+				currDir = currDir.replace("/", "\\");
 			}
 
-			String srcFolderName = File.separator + "src" + File.separator;
+			String srcFolderName = "\\src\\";
 			String prjFolderName = currDir.substring(0, currDir.indexOf(srcFolderName));
-			// String wsFolderName = prjFolderName.substring(0,
-			// prjFolderName.lastIndexOf(File.separator));
-
-			throw new GeneratorException(currDir + ":" + srcFolderName + ":" + prjFolderName + ":"
-					+ ":" + enumFilePath);
-			// return wsFolderName + enumFilePath;
-
+			String wsFolderName = prjFolderName.substring(0, prjFolderName.lastIndexOf("\\"));
+			return wsFolderName + enumFilePath;
 		}
 		throw new GeneratorException("Missing enum file path!");
-
 	}
 
 	private static StringBuilder addKeyToEnum(StringBuilder addedKeys, String key, String comment) {
