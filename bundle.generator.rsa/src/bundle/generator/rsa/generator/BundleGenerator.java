@@ -202,10 +202,9 @@ public class BundleGenerator {
 					target.append(System.getProperty("line.separator"));
 				}
 
-				String header = target.substring(0,
-						target.lastIndexOf("implements IMessageKey {") + 24);
+				String header = target.substring(0, target.indexOf("{") + 1);
 
-				String footer = target.substring(target.indexOf("private String"), target.length());
+				String footer = target.substring(target.indexOf(";"), target.length());
 
 				StringBuilder cnt = new StringBuilder();
 				cnt.append(header);
