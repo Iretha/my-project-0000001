@@ -140,7 +140,7 @@ public class BundleGenerator {
 		if (addedKeys == null) {
 			addedKeys = new StringBuilder();
 		}
-		addedKeys.append("\t" + "/** " + comment + "*/");
+		addedKeys.append("\t" + "/** " + comment + " */");
 		addedKeys.append(System.getProperty("line.separator"));
 		addedKeys.append("\t" + key + "(\"" + key + "\"),");
 		addedKeys.append(System.getProperty("line.separator"));
