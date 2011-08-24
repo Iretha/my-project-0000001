@@ -204,7 +204,7 @@ public class BundleGenerator {
 
 				String header = target.substring(0, target.indexOf("{") + 1);
 
-				String footer = target.substring(target.indexOf(";"), target.length());
+				String footer = target.substring(target.indexOf("private"), target.length());
 
 				StringBuilder cnt = new StringBuilder();
 				cnt.append(header);
