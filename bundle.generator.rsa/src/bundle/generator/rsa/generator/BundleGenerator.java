@@ -286,7 +286,7 @@ public class BundleGenerator {
 								+ "\". First one is the keyword, followed by translation for each locale in appropriate order, determinated on the first line.");
 			}
 
-		} else {
+		} else if (line != null && !line.trim().equals("")) {
 			for (int x = 0; x < locales.length; x++) {
 				contents[x] = appendLine(contents[x], PROP_FILE_COMMENT_CHAR + line);
 			}
