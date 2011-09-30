@@ -246,11 +246,11 @@ public class BundleGenerator {
 					output.close();
 				}
 				if (outStream != null) {
-					//outStream.flush();
+					//TODO outStream.flush();
 					outStream.close();
 				}
 				if (fileOutStream != null) {
-					//fileOutStream.flush();
+					//TODO fileOutStream.flush();
 					fileOutStream.close();
 				}
 			} catch (IOException e) {
