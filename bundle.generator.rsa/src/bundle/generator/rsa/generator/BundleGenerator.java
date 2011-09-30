@@ -30,8 +30,11 @@ public class BundleGenerator {
 
 	/**
 	 * @param destinationDir
+	 *            - директория, където трябва да се съхрани файла
 	 * @param sourceFilePath
+	 *            - сорс
 	 * @throws GeneratorException
+	 *             - грешка
 	 */
 	public static void generateBundleFiles(String destinationDir, String sourceFilePath)
 			throws GeneratorException {
@@ -241,9 +244,11 @@ public class BundleGenerator {
 					output.close();
 				}
 				if (outStream != null) {
+					outStream.flush();
 					outStream.close();
 				}
 				if (fileOutStream != null) {
+					fileOutStream.flush();
 					fileOutStream.close();
 				}
 			} catch (IOException e) {

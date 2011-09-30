@@ -11,14 +11,16 @@ public class GeneratorException extends Exception {
 	private static final long serialVersionUID = 2339874158401837727L;
 
 	/**
-	 * @param arg0
+	 * @param msg
+	 *            - Съобщение
 	 */
-	public GeneratorException(String arg0) {
-		super(arg0);
+	public GeneratorException(String msg) {
+		super(msg);
 	}
 
 	/**
 	 * @param arg0
+	 *            - грешка
 	 */
 	public GeneratorException(Throwable arg0) {
 		super(arg0);

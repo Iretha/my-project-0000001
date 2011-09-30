@@ -15,8 +15,6 @@ import org.eclipse.core.internal.resources.File;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.DirectoryDialog;
-import org.eclipse.swt.widgets.FileDialog;
-
 import bundle.generator.rsa.generator.GeneratorException;
 
 /**
