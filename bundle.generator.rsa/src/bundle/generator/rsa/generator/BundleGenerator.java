@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 /**
+ * Version Date - 30.09.2011
+ * 
  * @author MBD
  */
 public class BundleGenerator {
