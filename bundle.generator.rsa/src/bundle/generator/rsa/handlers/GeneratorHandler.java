@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import bundle.generator.rsa.generator.GeneratorException;
-
+import org.eclipse.jface.action.Action;
 /**
  * @author MBD
  * 
@@ -51,6 +51,8 @@ public class GeneratorHandler extends AbstractHandler {
 						generateBundleFiles(bundleDestDir, sourceFilePath.toOSString());
 						openInformation(getActiveShell(event), "Information",
 								"All Done! Please refresh destination directory to view generated files!");
+						getActiveShell(event).redraw();
+
 					} catch (GeneratorException e) {
 						openError(getActiveShell(event), "Runtime Exception", e.getMessage());
 					}
