@@ -156,13 +156,15 @@ public class BundleGenerator {
 		throw new GeneratorException("Missing enum file path!");
 	}
 
-	private static StringBuilder addKeyToEnum(StringBuilder addedKeys, String key, String comment) {
+	private static StringBuilder addKeyToEnum(StringBuilder addedKeys, String key, String comment,
+			boolean upperMode) {
 		if (addedKeys == null) {
 			addedKeys = new StringBuilder();
 		}
+		String enumKey = upperMode ? key.toUpperCase() : key;
 		addedKeys.append("\t" + "/** " + comment + " */");
 		addedKeys.append(System.getProperty("line.separator"));
-		addedKeys.append("\t" + key + "(\"" + key + "\"),");
+		addedKeys.append("\t" + enumKey + "(\"" + key + "\"),");
 		addedKeys.append(System.getProperty("line.separator"));
 		addedKeys.append(System.getProperty("line.separator"));
 		return addedKeys;
@@ -287,7 +289,7 @@ public class BundleGenerator {
 					contents[x] = appendLine(contents[x], subs[0] + "="
 							+ convertToHexString(subs[1]));
 					if (x == 0) {
-						addedKeys = addKeyToEnum(addedKeys, subs[0], subs[1]);
+						addedKeys = addKeyToEnum(addedKeys, subs[0], subs[1], upperMode);
 					}
 				}
 			} else if (subs.length == wordCount) {
@@ -295,7 +297,7 @@ public class BundleGenerator {
 					contents[x] = appendLine(contents[x], subs[0] + "="
 							+ convertToHexString(subs[x + 1]));
 					if (x == 0) {
-						addedKeys = addKeyToEnum(addedKeys, subs[0], subs[1]);
+						addedKeys = addKeyToEnum(addedKeys, subs[0], subs[1], upperMode);
 					}
 				}
 			} else {
