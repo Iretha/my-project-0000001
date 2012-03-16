@@ -24,11 +24,13 @@ public class BundleGenerator {
 
 	private static final String FILE_ENCODING = "UTF-8";
 
-	private static final String FILE_EXTENSION_SEPARATOR = ".";
+	private static final String FILE_EXTENSION_SEPARATOR = ".properties";
 
 	private static final String LOCALE_SEPARATOR = "_";
 
 	private static final String PROP_FILE_COMMENT_CHAR = "#";
+
+	private static final String KEYS_MODE_UPPERCASE = "UPPERCASE";
 
 	/**
 	 * @param destinationDir
@@ -47,7 +49,7 @@ public class BundleGenerator {
 			char separator = 0;
 			int cnt = 0;
 			String targetFileName = null;
-			String targetFileExtension = null;
+			boolean upperMode = false;
 			String[] locales = null;
 			StringBuilder[] contents = null;
 			String line = null;
@@ -70,30 +72,32 @@ public class BundleGenerator {
 								"\"|\" is reserved! Please choose another character!");
 					}
 					subs = line.split(new String(new char[] { separator }));
-					if (subs.length < 5) {
+					if (subs.length < 4) {
 						throw new GeneratorException(
 								"Source file is not valid! First line should contain following information: #(the separator itself)WebMessages(output file name)#properties(output file extension)#en(locale1)#bg(locale2)#nn(localeN)");
 					}
 					targetFileName = subs[1];
-					targetFileExtension = FILE_EXTENSION_SEPARATOR + subs[2];
+					upperMode = subs[2] != null && subs[2].equalsIgnoreCase(KEYS_MODE_UPPERCASE);
 					enumFilePath = subs[3];
-					locales = new String[subs.length - 4];
-					for (int i = 4; i < subs.length; i++) {
-						locales[i - 4] = LOCALE_SEPARATOR + subs[i];
+
+					if (subs.length > 4) {
+						locales = new String[subs.length - 4];
+						for (int i = 4; i < subs.length; i++) {
+							locales[i - 4] = LOCALE_SEPARATOR + subs[i];
+						}
+						contents = new StringBuilder[locales.length];
+					} else {
+						locales = new String[subs.length - 4];
+						locales[0] = "";
 					}
-					contents = new StringBuilder[locales.length];
+
 				} else {
-					keys = writeLine(keys, separator, locales, contents, line, cnt);
+					keys = writeLine(keys, separator, locales, contents, line, cnt, upperMode);
 				}
 			}
 
-			if (locales != null && contents != null) {
-				for (int x = 0; x < locales.length; x++) {
-					if (contents[x].length() > 0) {
-						writeFile(contents[x], destinationDir + File.separatorChar + targetFileName
-								+ locales[x] + targetFileExtension);
-					}
-				}
+			if (contents != null) {
+				writeBundle(destinationDir, targetFileName, locales, contents);
 			}
 
 			if (keys != null) {
@@ -117,6 +121,17 @@ public class BundleGenerator {
 				}
 			} catch (IOException e) {
 				throw new GeneratorException("I/O Problem with the file reader.");
+			}
+		}
+	}
+
+	private static void writeBundle(String destinationDir, String targetFileName, String[] locales,
+			StringBuilder[] contents) throws GeneratorException {
+		// пишем файл за всеки един Locale
+		for (int x = 0; x < locales.length; x++) {
+			if (contents[x].length() > 0) {
+				writeFile(contents[x], destinationDir + File.separatorChar + targetFileName
+						+ locales[x] + FILE_EXTENSION_SEPARATOR);
 			}
 		}
 	}
@@ -246,11 +261,11 @@ public class BundleGenerator {
 					output.close();
 				}
 				if (outStream != null) {
-					//TODO outStream.flush();
+					// TODO outStream.flush();
 					outStream.close();
 				}
 				if (fileOutStream != null) {
-					//TODO fileOutStream.flush();
+					// TODO fileOutStream.flush();
 					fileOutStream.close();
 				}
 			} catch (IOException e) {
@@ -260,13 +275,14 @@ public class BundleGenerator {
 	}
 
 	private static StringBuilder writeLine(StringBuilder addedKeys, char separator,
-			String[] locales, StringBuilder[] contents, String line, int cnt)
+			String[] locales, StringBuilder[] contents, String line, int cnt, boolean upperMode)
 			throws GeneratorException {
 		if (line != null && !line.startsWith(PROP_FILE_COMMENT_CHAR) && line.indexOf(separator) > 0) {
+			// редът, разделен на отделни низове
 			String[] subs = line.split(new String(new char[] { separator }));
 			int wordCount = locales.length + 1;
 			if (subs.length == 2 && subs.length != wordCount) {
-				// copy to all files
+				// copy all to files
 				for (int x = 0; x < locales.length; x++) {
 					contents[x] = appendLine(contents[x], subs[0] + "="
 							+ convertToHexString(subs[1]));
