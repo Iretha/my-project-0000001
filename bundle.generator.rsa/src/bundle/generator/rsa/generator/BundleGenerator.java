@@ -85,11 +85,11 @@ public class BundleGenerator {
 						for (int i = 4; i < subs.length; i++) {
 							locales[i - 4] = LOCALE_SEPARATOR + subs[i];
 						}
-						contents = new StringBuilder[locales.length];
 					} else {
 						locales = new String[subs.length - 4];
 						locales[0] = "";
 					}
+					contents = new StringBuilder[locales.length];
 
 				} else {
 					keys = writeLine(keys, separator, locales, contents, line, cnt, upperMode);
@@ -108,6 +108,8 @@ public class BundleGenerator {
 			throw new GeneratorException("File not found: " + destinationDir);
 		} catch (IOException e) {
 			throw new GeneratorException("I/O Problem with: " + destinationDir);
+		} catch (Exception e) {
+			throw new GeneratorException(e.getMessage());
 		} finally {
 			try {
 				if (reader != null) {
@@ -257,6 +259,8 @@ public class BundleGenerator {
 			output.flush();
 		} catch (IOException e) {
 			throw new GeneratorException("I/O Probelm with: " + fileName);
+		} catch (Exception e) {
+			throw new GeneratorException(e.getMessage());
 		} finally {
 			try {
 				if (output != null) {
