@@ -86,7 +86,7 @@ public class BundleGenerator {
 							locales[i - 4] = LOCALE_SEPARATOR + subs[i];
 						}
 					} else {
-						locales = new String[subs.length - 4];
+						locales = new String[1];
 						locales[0] = "";
 					}
 					contents = new StringBuilder[locales.length];
@@ -109,7 +109,7 @@ public class BundleGenerator {
 		} catch (IOException e) {
 			throw new GeneratorException("I/O Problem with: " + destinationDir);
 		} catch (Exception e) {
-			throw new GeneratorException(e.getMessage());
+			throw new GeneratorException("Code101 " + e.getMessage());
 		} finally {
 			try {
 				if (reader != null) {
@@ -260,7 +260,7 @@ public class BundleGenerator {
 		} catch (IOException e) {
 			throw new GeneratorException("I/O Probelm with: " + fileName);
 		} catch (Exception e) {
-			throw new GeneratorException(e.getMessage());
+			throw new GeneratorException("Code201 " + e.getMessage());
 		} finally {
 			try {
 				if (output != null) {
